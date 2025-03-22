@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
 
-import authRoutes from "../src/routes/auth.js";
+import authRoutes from "./src/routes/auth.js";      
 
 dotenv.config();
 
@@ -21,10 +21,11 @@ app.use(morgan("dev"));
 app.use("/api/auth", authRoutes);
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/soccerbetting")
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch(err => console.log("Database Connection Error:", err));
 
 // Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port:${PORT}`));
+ 

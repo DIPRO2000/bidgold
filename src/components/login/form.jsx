@@ -1,6 +1,39 @@
-import React from 'react';
+import React,{useState} from 'react';
 
 function Form() {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setError(""); // Reset error message
+  
+      try {
+        const response = await fetch("http://localhost:3000/api/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+  
+        const data = await response.json();
+  
+        if (!response.ok) {
+          alert("Login Failed!");
+          throw new Error(data.message || "Login failed");
+        }
+  
+        localStorage.setItem("token", data.token); // Store JWT token
+        alert("Login Successful!");
+        window.location.href = "/"; // Redirect after login (change as needed)
+      } catch (err) {
+        setError(err.message);
+      }
+    }
+
   return (
     <>
       <div className="relative flex justify-center bg-white px-4">
@@ -15,7 +48,7 @@ function Form() {
           {/* Form & Image Section */}
           <div className="flex flex-col md:flex-row items-center mt-4">
             {/* Form */}
-            <form className="w-full md:w-2/3">
+            <form className="w-full md:w-2/3"  onSubmit={handleSubmit}>
               <label className="block mt-2">
                 <div className="flex flex-col">
                   <span className="text-white w-fit px-2 h-6 font-semibold">USERNAME</span>
@@ -23,6 +56,9 @@ function Form() {
                     type="email"
                     className="form-input w-full md:w-80 rounded p-2 bg-white text-black border-2 border-black"
                     placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                 </div>
               </label>
@@ -34,11 +70,14 @@ function Form() {
                     type="password"
                     className="form-input w-full md:w-80 rounded p-2 bg-white text-black border-2 border-black"
                     placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                   />
                 </div>
               </label>
 
-              <button className="mt-4">
+              <button type="submit" className="mt-4">
                 <img src="signin.svg" alt=""  />
               </button>
             </form>
