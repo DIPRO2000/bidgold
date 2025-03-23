@@ -1,38 +1,37 @@
-import React,{useState} from 'react';
+import React, { useState } from "react";
 
 function Form() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
-    
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      setError(""); // Reset error message
-  
-      try {
-        const response = await fetch("http://localhost:3000/api/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        });
-  
-        const data = await response.json();
-  
-        if (!response.ok) {
-          alert("Login Failed!");
-          throw new Error(data.message || "Login failed");
-        }
-  
-        localStorage.setItem("token", data.token); // Store JWT token
-        alert("Login Successful!");
-        window.location.href = "/"; // Redirect after login (change as needed)
-      } catch (err) {
-        setError(err.message);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(""); // Reset error message
+
+    try {
+      const response = await fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }), 
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert("Login Failed!");
+        throw new Error(data.message || "Login failed");
       }
+
+      localStorage.setItem("token", data.token); // Store JWT token
+      alert("Login Successful!");
+      window.location.href = "/"; // Redirect after login (change as needed)
+    } catch (err) {
+      setError(err.message);
     }
+  };
 
   return (
     <>
@@ -48,16 +47,16 @@ function Form() {
           {/* Form & Image Section */}
           <div className="flex flex-col md:flex-row items-center mt-4">
             {/* Form */}
-            <form className="w-full md:w-2/3"  onSubmit={handleSubmit}>
+            <form className="w-full md:w-2/3" onSubmit={handleSubmit}>
               <label className="block mt-2">
                 <div className="flex flex-col">
                   <span className="text-white w-fit px-2 h-6 font-semibold">USERNAME</span>
                   <input
-                    type="email"
+                    type="text"
                     className="form-input w-full md:w-80 rounded p-2 bg-white text-black border-2 border-black"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your Username"
+                    value={username} // Added value
+                    onChange={(e) => setUsername(e.target.value)} // Added onChange
                     required
                   />
                 </div>
@@ -77,8 +76,12 @@ function Form() {
                 </div>
               </label>
 
-              <button type="submit" className="mt-4">
-                <img src="signin.svg" alt=""  />
+              {/* Submit button (fixed type="submit") */}
+              <button
+                type="submit"
+                className="mt-12 bg-white text-black w-full font-bold hover:bg-gray-400 sm:w-1/3 md:w-1/4 lg:w-1/5 border-2 border-black p-4 rounded-md shadow-inner shadow-black"
+              >
+                DONE
               </button>
             </form>
 
@@ -89,30 +92,22 @@ function Form() {
 
         {/* Background Images (No Position Change) */}
         <div className="absolute -right-8 mt-2 overflow-hidden">
-          <img
-            src="Shades.svg"
-            alt="random"
-            className="w-full h-full"
-            style={{ clipPath: "inset(0 30% 0 0)" }}
-          />
+          <img src="Shades.svg" alt="random" className="w-full h-full" style={{ clipPath: "inset(0 30% 0 0)" }} />
         </div>
 
         <div className="absolute -left-8 bottom-0 overflow-hidden">
-          <img
-            src="leftshades.svg"
-            alt="random"
-            className="w-full h-full"
-            style={{ clipPath: "inset(0 0 0 30%)" }}
-          />
+          <img src="leftshades.svg" alt="random" className="w-full h-full" style={{ clipPath: "inset(0 0 0 30%)" }} />
         </div>
 
         {/* Back to Top Button Positioned Next to leftshades.svg */}
         <div className="absolute bottom-0 left-0 flex justify-center mb-4 w-full">
-  <button className="text-center w-2/3 md:w-[1190px] max-w-[1190px] h-8 bg-[#D9D9D9] flex justify-center items-center gap-3">
-    Back to the Top <img src="up.svg" className="w-4" />
-  </button>
-</div>
-
+          <button
+            className="text-center w-2/3 md:w-[1190px] max-w-[1190px] h-8 bg-[#D9D9D9] flex justify-center font-bold items-center gap-3 transition-all duration-300 hover:bg-gradient-to-b hover:from-[#47B67C] hover:to-[#208C53] hover:text-black"
+            onClick={() => document.getElementById("content")?.scrollIntoView({ behavior: "smooth" })}
+          >
+            Back to the Top <img src="up.svg" className="w-4" />
+          </button>
+        </div>
       </div>
     </>
   );
