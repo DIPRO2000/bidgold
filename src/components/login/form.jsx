@@ -20,9 +20,9 @@ function Form() {
                 <div className="flex flex-col">
                   <span className="text-white w-fit px-2 h-6 font-semibold">USERNAME</span>
                   <input
-                    type="email"
+                    type="text"
                     className="form-input w-full md:w-80 rounded p-2 bg-white text-black border-2 border-black"
-                    placeholder="Enter your email"
+                    placeholder="Enter your Username"
                   />
                 </div>
               </label>
@@ -69,9 +69,12 @@ function Form() {
 
         {/* Back to Top Button Positioned Next to leftshades.svg */}
         <div className="absolute bottom-0 left-0 flex justify-center mb-4 w-full">
-  <button className="text-center w-2/3 md:w-[1190px] max-w-[1190px] h-8 bg-[#D9D9D9] flex justify-center items-center gap-3">
-    Back to the Top <img src="up.svg" className="w-4" />
-  </button>
+        <button 
+  className="text-center w-2/3 md:w-[1190px] max-w-[1190px] h-8 bg-[#D9D9D9] flex justify-center font-bold items-center gap-3 transition-all duration-300 hover:bg-gradient-to-b hover:from-[#47B67C] hover:to-[#208C53] hover:text-black"
+  onClick={() => document.getElementById('content')?.scrollIntoView({ behavior: 'smooth' })}
+>
+  Back to the Top <img src="up.svg" className="w-4" />
+</button>
 </div>
 
       </div>

@@ -2,8 +2,7 @@ import React from "react";
 
 const Content = () => {
   return (
-    <section id="content">
-    <div className="relative w-full h-[33vh] md:h-96 flex flex-col items-center justify-center text-black text-3xl font-bold">
+    <><section id="content"><div className="relative w-full h-[33vh] md:h-96 flex flex-col items-center justify-center text-black text-3xl font-bold">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center"
@@ -23,7 +22,7 @@ const Content = () => {
         <p className="text-lg md:text-xl">ALL THE BEST FOR WINNING THE BET</p>
       </div>
     </div>
-    </section>
+    </section></>
   );
 };
 
