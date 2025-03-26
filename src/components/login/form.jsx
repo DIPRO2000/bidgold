@@ -38,8 +38,12 @@ function Form() {
                 </div>
               </label>
 
-              <button className="mt-4">
-                <img src="signin.svg" alt=""  />
+              <button
+                type="button"
+                className="mt-12 bg-white text-black w-full font-bold hover:bg-gray-400 sm:w-1/3 md:w-1/4 lg:w-1/5 border-2 border-black p-4 rounded-md shadow-inner shadow-black"
+                 // Corrected navigate usage
+              >
+                NEXT
               </button>
             </form>
 
