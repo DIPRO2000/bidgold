@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
+import Switch from "./toggle";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,7 +10,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -23,18 +23,12 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full bg-[#47B67C] text-white px-6 py-6 shadow-lg z-50">
       <div className="flex items-center justify-between">
-        {/* Logo */}
         <div className="flex items-center space-x-2">
           <img src="/logo.svg" alt="Logo" className="w-40" />
         </div>
 
-        {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 text-sm">
-          <a href="#" className="font-semibold hover:text-gray-200 active:text-black">
-            Home
-          </a>
-
-          {/* All Bets Dropdown */}
+          <a href="#" className="font-semibold hover:text-gray-200 active:text-black">Home</a>
           <div className="relative" ref={dropdownRef}>
             <button
               className="font-semibold flex items-center gap-1 hover:text-gray-200 active:text-black"
@@ -44,48 +38,31 @@ const Navbar = () => {
             </button>
             {dropdownOpen && (
               <div className="absolute left-0 mt-2 bg-white text-black rounded shadow-lg w-40">
-                <a href="#" className="block px-4 py-2 hover:bg-gray-200">
-                  Live Bets
-                </a>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-200">
-                  Upcoming Bets
-                </a>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-200">Live Bets</a>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-200">Upcoming Bets</a>
               </div>
             )}
           </div>
-
-          <a href="#" className="font-semibold hover:text-gray-200 active:text-black">
-            FAQ
-          </a>
-
-          {/* Dashboard */}
+          <a href="#" className="font-semibold hover:text-gray-200 active:text-black">FAQ</a>
           <div className="relative">
-            <button className="font-semibold flex items-center gap-1 active:text-black hover:text-gray-200">
-              Dashboard <ChevronDown size={16} />
-            </button>
+            <button className="font-semibold flex items-center gap-1 active:text-black hover:text-gray-200">Dashboard <ChevronDown size={16} /></button>
           </div>
         </div>
 
-        {/* Auth Buttons (Desktop) */}
+        {/* Desktop Buttons */}
         <div className="hidden md:flex space-x-3">
+          <Switch />
           <button
-            className={`px-4 py-1 rounded-md font-semibold shadow-md  ${
-              location.pathname === "/login"
-                ? "bg-[#208C53] text-white shadow-md shadow-gray-900"
-                : "bg-white text-black border-black border-2 hover:bg-gray-200 active:bg-[#208C53] active:text-white active:border-0"
+            className={`px-4 py-1 rounded-md font-semibold shadow-md ${
+              location.pathname === "/login" ? "bg-[#208C53] text-white shadow-md shadow-gray-900" : "bg-white text-black border-black border-2 hover:bg-gray-200 active:bg-[#208C53] active:text-white active:border-0"
             }`}
             onClick={() => navigate("/login")}
           >
             Sign in
           </button>
-
           <button
-            className={`px-4 py-1 rounded-md font-semibold shadow-md  ${
-              location.pathname === "/register" ||
-              location.pathname === "/register2" ||
-              location.pathname === "/register3"
-                ? "bg-[#208C53] text-white shadow-md shadow-gray-900"
-                : "bg-white text-black border-black border-2 hover:bg-gray-200 active:bg-[#208C53] active:text-white active:border-0"
+            className={`px-4 py-1 rounded-md font-semibold shadow-md ${
+              ["/register", "/register2", "/register3"].includes(location.pathname) ? "bg-[#208C53] text-white shadow-md shadow-gray-900" : "bg-white text-black border-black border-2 hover:bg-gray-200 active:bg-[#208C53] active:text-white active:border-0"
             }`}
             onClick={() => navigate("/register")}
           >
@@ -94,67 +71,52 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <button
-          className="md:hidden focus:outline-none"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle Menu"
-        >
+        <button className="md:hidden focus:outline-none" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden mt-3 bg-green-800 text-white p-4 rounded-lg space-y-2">
-          <a href="#" className="block py-2 border-b border-gray-600">
-            Home
-          </a>
+      
+        {isOpen && (
+          <div className="md:hidden mt-3 bg-green-800 text-white p-4 rounded-lg space-y-2">
+            <a href="#" className="block py-2 border-b border-gray-600">Home</a>
+            <div className="relative">
+          <button className="w-full text-left py-2 border-b border-gray-600 flex items-center justify-between" onClick={() => setDropdownOpen(!dropdownOpen)}>
+            All Bets <ChevronDown size={16} />
+          </button>
+          {dropdownOpen && (
+            <div className="bg-white text-black rounded shadow-lg w-full">
+              <a href="#" className="block px-4 py-2 hover:bg-gray-200">Live Bets</a>
+              <a href="#" className="block px-4 py-2 hover:bg-gray-200">Upcoming Bets</a>
+            </div>
+          )}
+            </div>
+            <div className="relative">
+          <button className="w-full text-left py-2 border-b border-gray-600 flex items-center justify-between">
+            Dashboard <ChevronDown size={16} />
+          </button>
+            </div>
+            <a href="#" className="block py-2 border-b border-gray-600">FAQ</a>
 
-          {/* Mobile Dropdown */}
-          <div className="relative">
+            {/* Buttons appear only when the menu is opened */}
+          <div className="mt-3 flex flex-col items-center space-y-2">
+           
+            <Switch />
+            
             <button
-              className="w-full text-left py-2 border-b border-gray-600"
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-            >
-              All Bets
-            </button>
-            {dropdownOpen && (
-              <div className="bg-white text-black rounded shadow-lg w-full">
-                <a href="#" className="block px-4 py-2 hover:bg-gray-200">
-                  Live Bets
-                </a>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-200">
-                  Upcoming Bets
-                </a>
-              </div>
-            )}
-          </div>
-
-          <a href="#" className="block py-2 border-b border-gray-600">
-            FAQ
-          </a>
-          <a href="#" className="block py-2 border-b border-gray-600">
-            Dashboard
-          </a>
-
-          <div className="mt-3 flex flex-col space-y-2">
-            <button
-              className={`px-4 py-2 rounded-md font-semibold ${
-                location.pathname === "/login"
-                  ? "bg-[#208C53] border-2 border-[#208C53] text-white shadow-xl shadow-gray-900"
-                  : "bg-white text-green-700 hover:bg-gray-200"
-              }`}
-              onClick={() => navigate("/login")}
-            >
-              Sign In
-            </button>
-
-            <button
-  className={`px-4 py-2 rounded-md font-semibold ${
-    location.pathname === "/register" ||
-    location.pathname === "/register2" ||
-    location.pathname === "/register3"
-      ? "bg-[#208C53] shadow-xl !shadow-gray-900 text-blue-600"
+  className={`w-32 px-4 py-2 rounded-md font-semibold text-center ${
+    location.pathname === "/login"
+      ? "bg-[#208C53] border-2 border-[#208C53] text-white shadow-xl shadow-gray-900"
+      : "bg-white text-green-700 hover:bg-gray-200"
+  }`}
+  onClick={() => navigate("/login")}
+>
+  Sign In
+</button>
+<button
+  className={`w-32 px-4 py-2 rounded-md font-semibold text-center ${
+    ["/register", "/register2", "/register3"].includes(location.pathname)
+      ? "bg-[#208C53] shadow-xl !shadow-gray-900 text-white"
       : "bg-white text-black border hover:bg-gray-300"
   }`}
   onClick={() => navigate("/register")}

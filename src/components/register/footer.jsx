@@ -3,9 +3,9 @@ import { FaFacebookF, FaInstagram, FaTwitter, FaYelp } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <><div className=' text-black py-6 px-4 md:px-12 flex justify-center'>
+    <><div className=' text-black py-6 px-4 md:px-12 flex justify-center dark:bg-[#2D2D2D] bg-white'>
         
-    <footer className="bg-gray-100 text-black py-6 px-4 w-[84%] md:px-12">
+    <footer className="bg-gray-100 text-black py-6 px-4 w-[84%] md:px-12 dark:bg-[#5D5D5D]">
           {/* Top Section */}
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 border-b pb-4">
               {/* Address & Contact */}
@@ -51,13 +51,7 @@ const Footer = () => {
               </p>
           </div>
       </footer>
-      <div className="absolute -right-8 mt-2 hidden md:block">
-  <img
-    src="Shades.svg"
-    alt="random"
-    className="w-full h-full rotate-[129.27deg]"
-  />
-</div>
+      
 
 <div className="absolute -left-8 mt-40 hidden md:block">
   <img
