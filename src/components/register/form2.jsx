@@ -63,7 +63,7 @@ function Form2() {
         <div className="bg-gradient-to-b from-[#47B67C] to-[#208C53] p-8 rounded-lg shadow-2xl w-full m-20 mx-36 relative z-10">
           <img src="register2.svg" alt="random" className="w-full h-20 mb-10 mx-auto" />
           <div className="flex mt-2">
-            <h1 className="text-xl md:text-2xl font-bold text-black rounded-2xl px-4 py-2 inline-block shadow-[0_4px_8px_rgba(0,0,0,0.4)] w-96 text-center">
+            <h1 className="text-xl md:text-2xl font-bold text-[#F6BA02] rounded-2xl px-4 py-2 inline-block shadow-[0_4px_8px_rgba(0,0,0,0.4)] w-96 text-center">
               <i>USER SECURITY DETAILS</i>
             </h1>
           </div>

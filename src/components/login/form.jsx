@@ -39,7 +39,7 @@ function Form() {
         {/* Main Form Container */}
         <div className="bg-gradient-to-b from-[#47B67C] to-[#208C53] p-8 rounded-lg shadow-2xl w-full m-20 mx-36 relative z-10">
           <div className="flex mt-2">
-            <h1 className="text-xl md:text-2xl font-bold text-black rounded-2xl px-4 py-2 inline-block shadow-[0_4px_8px_rgba(0,0,0,0.4)] w-96 text-center">
+            <h1 className="text-xl md:text-2xl font-bold text-[#F6BA02] rounded-2xl px-4 py-2 inline-block shadow-[0_4px_8px_rgba(0,0,0,0.4)] w-96 text-center">
               <i>ENTER YOUR DETAILS</i>
             </h1>
           </div>
@@ -65,31 +65,26 @@ function Form() {
               <label className="block mt-4">
                 <div className="flex flex-col">
                   <div>
-                  <span className="text-white w-fit px-2 h-6">PASSWORD</span><br/>
-                  <input
-                    type="password"
-                    className="form-input w-full md:w-80 rounded p-2 bg-white text-black border-2 border-black"
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  /><br/>
-                  <button
-                  type="button"
-                  className="text-white hover:underline hover:text-gray-300 text-sm font-semibold"
-                  onClick={() => alert("Redirect to Forgot Password Page")}
-                >
-                  Forgot Password?
-                </button>
-                 </div>
-                
-              </div>
-                
+                    <span className="text-white w-fit px-2 h-6">PASSWORD</span><br/>
+                    <input
+                      type="password"
+                      className="form-input w-full md:w-80 rounded p-2 bg-white text-black border-2 border-black"
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    /><br/>
+                    <button
+                      type="button"
+                      className="text-white hover:underline hover:text-gray-300 text-sm font-semibold"
+                      onClick={() => alert("Redirect to Forgot Password Page")}
+                    >
+                      Forgot Password?
+                    </button>
+                  </div>
+                </div>
               </label>
               
-              {/* Forgot Password Button */}
-              
-
               {/* Submit button */}
               <button
                 type="submit"
@@ -97,7 +92,6 @@ function Form() {
               >
                 SIGN IN
               </button>
-              <div>Don't have an account?  <button className="text-white hover:text-gray-400 hover:underline" onclic> Register.</button></div>
             </form>
 
             {/* Right-Side Image */}
@@ -113,10 +107,11 @@ function Form() {
         {/* Back to Top Button Positioned Next to leftshades.svg */}
         <div className="absolute bottom-0 left-0 flex justify-center mb-4 w-full">
           <button
-            className="text-center w-2/3 dark:bg-[#7C7C7C] md:w-[1190px] max-w-[1190px] h-8 bg-[#D9D9D9] flex justify-center font-bold items-center gap-3 transition-all duration-300 hover:bg-gradient-to-b hover:from-[#47B67C] hover:to-[#208C53] hover:text-black"
+            className="text-center w-2/3 dark:bg-[#7C7C7C] hover:text-[#F6BA02] md:w-[1190px] max-w-[1190px] h-8 bg-[#D9D9D9] flex justify-center font-bold items-center gap-3 transition-all duration-300 hover:bg-gradient-to-b hover:from-[#47B67C] hover:to-[#208C53] "
             onClick={() => document.getElementById("content")?.scrollIntoView({ behavior: "smooth" })}
           >
-            Back to the Top <img src="up.svg" className="w-4" />
+            Back to the Top 
+            <img src="up.svg" className="w-4 transition-all duration-300 hover:invert" />
           </button>
         </div>
       </div>
