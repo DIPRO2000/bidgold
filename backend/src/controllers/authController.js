@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import crypto from "crypto";
 
 
 // User Registration
@@ -53,16 +54,20 @@ export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // Find user by username
+    // Find user by username and get associated email
     const user = await User.findOne({ username });
     if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
-    // Compare entered password with hashed password
+    // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
     // Generate JWT token
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+
+    // Generate Gravatar URL
+    const emailHash = crypto.createHash("md5").update(user.email.trim().toLowerCase()).digest("hex");
+    const profilePic = `https://www.gravatar.com/avatar/${emailHash}?d=identicon`;
 
     // Return user info with token
     res.json({
@@ -73,6 +78,7 @@ export const login = async (req, res) => {
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
+        profilePic,
       },
     });
   } catch (error) {

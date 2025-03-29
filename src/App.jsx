@@ -7,6 +7,7 @@ import Settings from './components/settingspages/settings';
 import Settings2 from './components/settingspages/settings2';
 import Oddtest from './components/oddtest';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Landing from './components/Landing';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/settings2" element={<Settings2 />} />
           <Route path="/oddtest" element={<Oddtest/>} />
+          <Route path="/" element={<Landing/>} />
       </Routes>
     </Router>
   );

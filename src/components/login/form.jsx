@@ -25,7 +25,10 @@ function Form() {
         throw new Error(data.message || "Login failed");
       }
 
-      localStorage.setItem("token", data.token); // Store JWT token
+      // Store JWT token and user data
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user)); // Store user info
+
       alert("Login Successful!");
       window.location.href = "/"; // Redirect after login (change as needed)
     } catch (err) {

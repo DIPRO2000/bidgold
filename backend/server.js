@@ -8,6 +8,7 @@ import morgan from "morgan";
 import authRoutes from "./src/routes/auth.js";      
 import oddsRoutes from "./src/routes/oddsRoutes.js";  // Import new odds route
 
+
 dotenv.config();
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(morgan("dev"));
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/odds", oddsRoutes);  // New odds route
+
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)

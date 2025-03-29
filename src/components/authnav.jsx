@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Switch from "./toggle";
 
-const Navbar = () => {
+const GuestNav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -49,7 +49,6 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Desktop Buttons */}
         <div className="hidden md:flex space-x-3">
           <Switch />
           <button
@@ -70,60 +69,47 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
         <button className="md:hidden focus:outline-none" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      
-        {isOpen && (
-          <div className="md:hidden mt-3 bg-green-800 text-white p-4 rounded-lg space-y-2">
-            <a href="#" className="block py-2 border-b border-gray-600">Home</a>
-            <div className="relative">
-          <button className="w-full text-left py-2 border-b border-gray-600 flex items-center justify-between" onClick={() => setDropdownOpen(!dropdownOpen)}>
-            All Bets <ChevronDown size={16} />
-          </button>
-          {dropdownOpen && (
-            <div className="bg-white text-black rounded shadow-lg w-full">
-              <a href="#" className="block px-4 py-2 hover:bg-gray-200">Live Bets</a>
-              <a href="#" className="block px-4 py-2 hover:bg-gray-200">Upcoming Bets</a>
-            </div>
-          )}
-            </div>
-            <div className="relative">
-          <button className="w-full text-left py-2 border-b border-gray-600 flex items-center justify-between">
-            Dashboard <ChevronDown size={16} />
-          </button>
-            </div>
-            <a href="#" className="block py-2 border-b border-gray-600">FAQ</a>
-
-            {/* Buttons appear only when the menu is opened */}
+      {isOpen && (
+        <div className="md:hidden mt-3 bg-green-800 text-white p-4 rounded-lg space-y-2">
+          <a href="#" className="block py-2 border-b border-gray-600">Home</a>
+          <div className="relative">
+            <button className="w-full text-left py-2 border-b border-gray-600 flex items-center justify-between" onClick={() => setDropdownOpen(!dropdownOpen)}>
+              All Bets <ChevronDown size={16} />
+            </button>
+            {dropdownOpen && (
+              <div className="bg-white text-black rounded shadow-lg w-full">
+                <a href="#" className="block px-4 py-2 hover:bg-gray-200">Live Bets</a>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-200">Upcoming Bets</a>
+              </div>
+            )}
+          </div>
+          <a href="#" className="block py-2 border-b border-gray-600">FAQ</a>
+          <div className="relative">
+            <button className="w-full text-left py-2 border-b border-gray-600 flex items-center justify-between">Dashboard <ChevronDown size={16} /></button>
+          </div>
           <div className="mt-3 flex flex-col items-center space-y-2">
-           
             <Switch />
-            
             <button
-  className={`w-32 px-4 py-2 rounded-md font-semibold text-center ${
-    location.pathname === "/login"
-      ? "bg-[#208C53] border-2 border-[#208C53] text-white shadow-xl shadow-gray-900"
-      : "bg-white text-green-700 hover:bg-gray-200"
-  }`}
-  onClick={() => navigate("/login")}
->
-  Sign In
-</button>
-<button
-  className={`w-32 px-4 py-2 rounded-md font-semibold text-center ${
-    ["/register", "/register2", "/register3"].includes(location.pathname)
-      ? "bg-[#208C53] shadow-xl !shadow-gray-900 text-white"
-      : "bg-white text-black border hover:bg-gray-300"
-  }`}
-  onClick={() => navigate("/register")}
->
-  Register
-</button>
-
+              className={`w-32 px-4 py-2 rounded-md font-semibold text-center ${
+                location.pathname === "/login" ? "bg-[#208C53] border-2 border-[#208C53] text-white shadow-xl shadow-gray-900" : "bg-white text-green-700 hover:bg-gray-200"
+              }`}
+              onClick={() => navigate("/login")}
+            >
+              Sign In
+            </button>
+            <button
+              className={`w-32 px-4 py-2 rounded-md font-semibold text-center ${
+                ["/register", "/register2", "/register3"].includes(location.pathname) ? "bg-[#208C53] shadow-xl !shadow-gray-900 text-white" : "bg-white text-black border hover:bg-gray-300"
+              }`}
+              onClick={() => navigate("/register")}
+            >
+              Register
+            </button>
           </div>
         </div>
       )}
@@ -131,4 +117,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default GuestNav;
