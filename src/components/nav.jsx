@@ -41,7 +41,7 @@ const Mainav = ({ user, setUser }) => {
         </div>
 
         <div className="hidden md:flex space-x-6 text-sm">
-          <a href="#" className="font-semibold hover:text-gray-200 active:text-black">Home</a>
+          <a href="/" className="font-semibold hover:text-gray-200 active:text-black">Home</a>
           <div className="relative" ref={dropdownRef}>
             <button
               className="font-semibold flex items-center gap-1 hover:text-gray-200 active:text-black"
@@ -76,7 +76,7 @@ const Mainav = ({ user, setUser }) => {
                   alt="Profile"
                 />
               </button>
-              <button onClick={logout} className="bg-red-500 px-4 py-2 rounded text-white hover:bg-red-600">
+              <button onClick={logout} className="bg-red-500 px-4 py-2 cursor-pointer rounded text-white hover:bg-red-600">
                 Log Out
               </button>
             </div>

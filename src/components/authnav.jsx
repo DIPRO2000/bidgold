@@ -28,7 +28,7 @@ const GuestNav = () => {
         </div>
 
         <div className="hidden md:flex space-x-6 text-sm">
-          <a href="#" className="font-semibold hover:text-gray-200 active:text-black">Home</a>
+          <a href="/" className="font-semibold hover:text-gray-200 active:text-black">Home</a>
           <div className="relative" ref={dropdownRef}>
             <button
               className="font-semibold flex items-center gap-1 hover:text-gray-200 active:text-black"
@@ -52,7 +52,7 @@ const GuestNav = () => {
         <div className="hidden md:flex space-x-3">
           <Switch />
           <button
-            className={`px-4 py-1 rounded-md font-semibold shadow-md ${
+            className={`px-4 py-1 rounded-md cursor-pointer font-semibold shadow-md ${
               location.pathname === "/login" ? "bg-[#208C53] text-white shadow-md shadow-gray-900" : "bg-white text-black border-black border-2 hover:bg-gray-200 active:bg-[#208C53] active:text-white active:border-0"
             }`}
             onClick={() => navigate("/login")}
@@ -60,7 +60,7 @@ const GuestNav = () => {
             Sign in
           </button>
           <button
-            className={`px-4 py-1 rounded-md font-semibold shadow-md ${
+            className={`px-4 py-1 rounded-md cursor-pointer font-semibold shadow-md ${
               ["/register", "/register2", "/register3"].includes(location.pathname) ? "bg-[#208C53] text-white shadow-md shadow-gray-900" : "bg-white text-black border-black border-2 hover:bg-gray-200 active:bg-[#208C53] active:text-white active:border-0"
             }`}
             onClick={() => navigate("/register")}
@@ -95,7 +95,7 @@ const GuestNav = () => {
           <div className="mt-3 flex flex-col items-center space-y-2">
             <Switch />
             <button
-              className={`w-32 px-4 py-2 rounded-md font-semibold text-center ${
+              className={`w-32 px-4 py-2 rounded-md cursor-pointer font-semibold text-center ${
                 location.pathname === "/login" ? "bg-[#208C53] border-2 border-[#208C53] text-white shadow-xl shadow-gray-900" : "bg-white text-green-700 hover:bg-gray-200"
               }`}
               onClick={() => navigate("/login")}
@@ -103,7 +103,7 @@ const GuestNav = () => {
               Sign In
             </button>
             <button
-              className={`w-32 px-4 py-2 rounded-md font-semibold text-center ${
+              className={`w-32 px-4 py-2 rounded-md cursor-pointer font-semibold text-center ${
                 ["/register", "/register2", "/register3"].includes(location.pathname) ? "bg-[#208C53] shadow-xl !shadow-gray-900 text-white" : "bg-white text-black border hover:bg-gray-300"
               }`}
               onClick={() => navigate("/register")}

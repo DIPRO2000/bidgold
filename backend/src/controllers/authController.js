@@ -2,17 +2,27 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import crypto from "crypto";
-
+import dotenv from "dotenv";
+ 
+dotenv.config();
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) {
+  throw new Error("JWT_SECRET is not defined in environment variables!");
+}
 
 // User Registration
 export const register = async (req, res) => {
   try {
     const { firstName, lastName, dateOfBirth, phone, gender, username, email, password } = req.body;
 
-    // Convert "DD-MMM-YYYY" (e.g., "15-Mar-2025") to Date
+    // Validate password
+    if (!password || password.length < 6) {
+      return res.status(400).json({ message: "Password must be at least 6 characters long" });
+    }
+
+    // Convert "DD-MMM-YYYY" format to Date
     const dobParts = dateOfBirth.split(" ");
     const formattedDOB = new Date(`${dobParts[1]} ${dobParts[0]}, ${dobParts[2]}`);
-
     if (isNaN(formattedDOB)) {
       return res.status(400).json({ message: "Invalid date format. Use DD-MMM-YYYY (e.g., 15-Mar-1995)" });
     }
@@ -46,15 +56,12 @@ export const register = async (req, res) => {
   }
 };
 
-
-
-
 // User Login
 export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    // Find user by username and get associated email
+    // Find user by username
     const user = await User.findOne({ username });
     if (!user) return res.status(400).json({ message: "Invalid credentials" });
 
@@ -63,7 +70,7 @@ export const login = async (req, res) => {
     if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
 
     // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "1d" });
 
     // Generate Gravatar URL
     const emailHash = crypto.createHash("md5").update(user.email.trim().toLowerCase()).digest("hex");
@@ -71,7 +78,7 @@ export const login = async (req, res) => {
 
     // Return user info with token
     res.json({
-      token,
+      token: `Bearer ${token}`, // Adding Bearer prefix
       user: {
         id: user._id,
         username: user.username,
