@@ -1,4 +1,4 @@
-import Feedback from "../models/Feedback.js";
+import Feedback from "../models/feedback.js";
 import User from "../models/User.js";
 
 export const feedback = async (req, res) => {
