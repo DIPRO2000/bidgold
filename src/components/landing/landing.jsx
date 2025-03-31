@@ -5,10 +5,11 @@ import MatchFixtures from "./fixtures"; // Ensure correct path
 
 import Footer from "./Footer";
 import Body from "./body";
+import NavbarManager from "../NavManager";
 function Landing() {
   return (
     <div className="pt-20"> {/* Added padding to prevent content overlap */}
-      <GuestNav/>
+      <NavbarManager/>
       <Content />
       
       <MatchFixtures />
