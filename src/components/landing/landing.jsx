@@ -1,18 +1,17 @@
 import React from "react";
-import NavbarManager from "../NavManager.jsx"; // Ensure correct path
+import GuestNav from "../authnav"; // Ensure correct path
 import Content from "./content";
-//import BettingStats from "./bettingstats";
-//import Form from "./form";
-import Fixtures from "./fixtures.jsx";
+import MatchFixtures from "./fixtures"; // Ensure correct path
+
 import Footer from "./Footer";
 import Body from "./body";
 function Landing() {
   return (
     <div className="pt-20"> {/* Added padding to prevent content overlap */}
-      <NavbarManager/>
+      <GuestNav/>
       <Content />
       
-      <Fixtures />
+      <MatchFixtures />
       <Body />
       <Footer />
     </div>
