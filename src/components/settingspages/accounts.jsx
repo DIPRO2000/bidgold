@@ -4,7 +4,7 @@ const Account = () => {
   const settings = [
     "Sync Watchlist to My Stuff :",
     "Hold Your Subscription :",
-    "Cancel Your Subscription :",
+    "Cancel Subscription :",
     "Your Devices :",
   ];
 
@@ -13,7 +13,7 @@ const Account = () => {
       {settings.map((setting, index) => (
         <div key={index} className="flex justify-between items-center">
           <span className="text-lg font-semibold text-black dark:text-white">
-            {setting} :
+            {setting} 
           </span>
           <button className="bg-green-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-green-700">
             Manage
