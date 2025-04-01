@@ -12,10 +12,14 @@ const ProfileForm = () => {
   return (
     <div className="flex-1 flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-10 p-6 w-full  rounded-lg ">
       {/* Profile Image */}
+      <div>
       <div className="w-40 h-40 md:w-64 md:h-64 bg-gray-300 rounded-full flex items-center justify-center ">
         {/* Placeholder for image */}
       </div>
-
+      <div className="w-full justify-center items-center flex flex-col">
+      <button className="flex justify-center w-2/5 bg-[#D9D9D9] p-1 font-bold rounded-lg mt-4 hover:bg-green-600">EDIT IMAGE </button>
+      </div>
+      </div>
       {/* Input Fields */}
       <div className="w-full md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
         {fields.map(({ label, placeholder }) => (
