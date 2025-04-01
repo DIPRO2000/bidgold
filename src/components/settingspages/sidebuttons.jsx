@@ -4,17 +4,16 @@ import { User, Lock, Settings } from "lucide-react";
 const SidebarButtons = ({ selectedTab, setSelectedTab }) => {
   const buttons = [
     { id: "personal", label: "Personal Information", icon: <User size={24} /> },
-    { id: "privacy", label: "Privacy Settings", icon: <Lock size={24} /> },
-    { id: "account", label: "Account Settings", icon: <Settings size={24} /> },
+   
   ];
 
   return (
-    <div className="w-full md:w-1/4 space-y-8 mt-6">
+    <div className="w-full md:w-1/4 space-y-8 mt-6 flex justify-center">
       {buttons.map(({ id, label, icon }) => (
         <button
           key={id}
           onClick={() => setSelectedTab(id)} // 👈 Click updates selectedTab
-          className={`w-full flex items-center space-x-3 p-4 md:p-5 rounded-lg text-lg font-semibold transition-all 
+          className={`w-3/4 flex items-center space-x-3 p-4 md:p-5 rounded-lg text-lg font-semibold transition-all 
             shadow-inner duration-300 shadow-black
             ${
               selectedTab === id
