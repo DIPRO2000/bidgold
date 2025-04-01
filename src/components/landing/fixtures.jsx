@@ -2,17 +2,17 @@ import { useState, useEffect } from "react";
 
 const MatchCard = ({ league, sport, time, team1, team2, score1, score2, odds, extraValue }) => {
   return (
-    <div className="border rounded-lg p-4 shadow-md w-[95%] flex flex-col mx-auto mb-4">
-      <div className="font-bold text-lg mb-2">{league} &nbsp;&nbsp;&nbsp;&nbsp; Sport: {sport.toUpperCase()}</div>
-      <div className="flex flex-row justify-between items-center">
+    <div className="border rounded-lg p-4 shadow-md w-full md:w-[95%] flex flex-col mx-auto mb-4">
+      <div className="font-bold text-lg mb-2 text-center md:text-left">{league} &nbsp;&nbsp;&nbsp;&nbsp; Sport: {sport.toUpperCase()}</div>
+      <div className="flex flex-col md:flex-row justify-between items-center">
         {/* Time Column */}
-        <div className="flex flex-col items-center text-xs text-gray-500 w-1/6">
+        <div className="flex flex-col items-center text-xs text-gray-500 w-full md:w-1/6 mb-2 md:mb-0">
           <span className="material-icons">schedule</span>
           <span>{time}</span>
         </div>
         
         {/* Team & Score Column */}
-        <div className="flex flex-col w-2/6">
+        <div className="flex flex-col w-full md:w-2/6">
           <div className="flex items-center gap-2">
             <span className="w-6 h-6 bg-gray-300 rounded-full"></span>
             <span className="font-semibold">{team1}</span>
@@ -26,7 +26,7 @@ const MatchCard = ({ league, sport, time, team1, team2, score1, score2, odds, ex
         </div>
         
         {/* Odds Column */}
-        <div className="flex justify-center w-2/6 gap-2">
+        <div className="flex justify-center w-full md:w-2/6 gap-2 mt-2 md:mt-0">
           {odds.map((odd, index) => (
             <span
               key={index}
@@ -38,7 +38,7 @@ const MatchCard = ({ league, sport, time, team1, team2, score1, score2, odds, ex
         </div>
         
         {/* Extra Column */}
-        <div className="w-1/6 text-right font-semibold text-gray-700">
+        <div className="w-full md:w-1/6 text-right font-semibold text-gray-700 mt-2 md:mt-0">
           {extraValue}
         </div>
       </div>
@@ -72,11 +72,11 @@ const MatchList = () => {
 
   return (
     <div className="p-4 w-full max-w-5xl mx-auto">
-      <div className="flex gap-2 mb-4 items-center">
+      <div className="flex flex-col md:flex-row gap-2 mb-4  items-center">
         {['All', 'Live', 'Upcoming'].map((filterType) => (
           <button
             key={filterType}
-            className={`px-3 py-1 rounded-lg ${filter === filterType.toLowerCase() ? "bg-green-500 text-white" : "bg-gray-200"}`}
+            className={`px-3 py-1 rounded-lg w-full dark:bg-[#4C4C4C] dark:text-white  md:w-auto ${filter === filterType.toLowerCase() ? "bg-green-500 text-white" : "bg-gray-200"}`}
             onClick={() => setFilter(filterType.toLowerCase())}
           >
             {filterType}
@@ -85,7 +85,7 @@ const MatchList = () => {
         
         {/* Bookmaker Selection */}
         <select
-          className="px-3 py-1 rounded-lg bg-gray-200"
+          className="px-3 py-1 dark:bg-[#4C4C4C] dark:text-white rounded-lg bg-gray-200 w-full md:w-auto"
           value={bookmaker}
           onChange={(e) => setBookmaker(e.target.value)}
         >

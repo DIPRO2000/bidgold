@@ -6,13 +6,13 @@ import BettingDashboard from "./bettings";
 import Feedback from "./feedback";
 import Footer from "./Footer";
 import Body from "./body";
-import NavbarManager from "../NavManager";
+import Authnav from "../authnav"; // Ensure correct path
 import HelpBanner from "./gethelp";
 
 function Landing() {
   return (
     <div className="pt-20 dark:bg-[#2D2D2D]"> {/* Added padding to prevent content overlap */}
-      <NavbarManager />
+      <Authnav />
 
       <Content />
       
