@@ -1,111 +1,36 @@
-import React, { useState } from "react";
-import { User } from "lucide-react"; // Importing account icon
-import { useNavigate } from "react-router-dom";
+import React from "react";
 
 const Body = () => {
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-
-  const submitHandler = async () => {
-    const token = localStorage.getItem("token");
-     
-
-    if (!token) {
-      alert("PLEASE LOG IN");
-      navigate("/login");
-      return;
-    }
-
-    if (!message.trim()) {
-      alert("Feedback message cannot be empty!"); 
-      return;
-    }
-
-    try {
-      const response = await fetch("http://localhost:3000/api/feedback", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token, // Added token for authentication
-        },
-        body: JSON.stringify({ feedback: message }),
-      });
-
-      const data = await response.json(); // Extracting JSON response
-
-      // if (Date.now() >= expiryTime) {
-      //   alert("Session expired. Please log in again.");
-      //   localStorage.removeItem("token");
-      //   navigate("/login");
-      //   return;
-      // }
-
-      if (!response.ok) {
-        throw new Error(data.message || "Feedback Submission Failed!");
-      }
-
-      alert("FEEDBACK SUBMITTED SUCCESSFULLY");
-      setMessage(""); // Clear textarea after successful submission
-    } catch (err) {
-      setError(err.message);
-      alert(`Error: ${err.message}`);
-    }
-  };
-
-  const feedbackData = [
-    { name: "User 1", won: "$100", feedback: "imply dummy text of the printing and typesetting industry. Lorem Ipsum has been the ind" },
-    { name: "User 2", won: "$250", feedback: "imply dummy text of the printing and typesetting industry. Lorem Ipsum has been the ind" },
-    { name: "User 3", won: "$75", feedback: "imply dummy text of the printing and typesetting industry. Lorem Ipsum has been the ind" },
-    { name: "User 4", won: "$180", feedback: "imply dummy text of the printing and typesetting industry. Lorem Ipsum has been the ind" },
+  // Money values (replace with dynamic data if needed)
+  const data = [
+    { icon: <img src="man.svg" alt="Main balance" width={28} height={28} />, title: "Open An Account", value: "Click on the Register button and fill out the form to create your account." },
+    { icon: <img src="purse.svg" alt="Total earning" width={28} height={28} />, title: "Make Your Deposit", value: "Choose your preferred payment method and make your first deposit." },
+    { icon: <img src="wagers.svg" alt="Deposit total" width={28} height={28} />, title: "Place Your Wagers", value: "Select your favorite sports and place your bets." },
+    { icon: <img src="money.svg" alt="Total payout" width={28} height={28} />, title: "Withdraw Your Winnings", value: "Cash out your winnings quickly and securely." },
   ];
 
   return (
-    <section className="w-screen flex flex-col items-center">
-      {/* Steps & Why Choose Us Images */}
-      <img src="/landingassets/STEPS.svg" alt="Steps" className="w-full" />
-      <img src="/landingassets/why choose us.svg" alt="Why Choose Us" className="w-full" />
+    <div className="p-8 bg-white dark:bg-[#2D2D2D] transition-all">
+      <div className="w-full flex flex-col items-center lg:items-start shadow-lg shadow-black rounded-xl p-6 bg-[#208C53] dark:bg-[#4C4C4C]">
+        {/* Heading */}
+        <div className="text-white dark:text-[#7C7C7C] font-bold text-2xl mb-6">
+          Easiest Step To Placing A Bet
+        </div>
 
-      {/* Feedback Section */}
-      <div className="w-screen bg-[#208C53] py-12 flex flex-col items-center">
-        <h2 className="text-black text-3xl font-extrabold mb-6 self-start ml-6">
-          Client's Valuable Feedback
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full px-6">
-          {feedbackData.map((item, index) => (
-            <div key={index} className="bg-[#47B67C] p-6 rounded-xl shadow-lg h-[220px] flex flex-col justify-start">
-              {/* Name, Won, and Icon (Top-Left Aligned) */}
-              <div className="flex items-center space-x-2 mb-2">
-                <User size={24} className="text-black" />
-                <h3 className="font-bold text-xl text-black">{item.name}</h3>
-              </div>
-              <p className="text-lg font-bold text-black">Won: {item.won}</p>
-
-              {/* Feedback Text */}
-              <p className="text-md mt-2 font-medium text-black">{item.feedback}</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+          {data.map((item, index) => (
+            <div
+              key={index}
+              className="bg-[#47B67C] dark:bg-[#2D2D2D] p-6 rounded-xl shadow-lg shadow-black flex flex-col items-start space-y-2 w-full sm:w-[280px] md:w-[250px] lg:w-[300px] h-auto transition-all"
+            >
+              <div className="text-[#F6BA02]">{item.icon}</div>
+              <h3 className="text-black dark:text-[#7C7C7C] font-bold text-lg">{item.title}</h3>
+              <p className="text-white dark:text-[#C0C0C0] text-md">{item.value}</p>
             </div>
           ))}
         </div>
       </div>
-
-      {/* Feedback Image & Form */}
-      <div className="w-[80%] md:w-[60%] bg-white shadow-lg rounded-lg p-6 mt-6 border border-gray-300">
-        <h2 className="text-lg font-extrabold mb-4 text-black">We Value Your Feedback</h2>
-        <textarea
-          className="w-full h-40 p-3 border border-gray-400 rounded-md focus:ring-2 focus:ring-green-500 text-black"
-          placeholder="Share your thoughts with us..."
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        ></textarea>
-        <button
-          className="mt-6 px-9 py-3 bg-green-700 text-white cursor-pointer font-bold rounded-md shadow-md hover:bg-green-800"
-          onClick={submitHandler}
-        >
-          SUBMIT
-        </button>
-        {error && <p className="text-red-500 mt-2">{error}</p>}
-      </div>
-    </section>
+    </div>
   );
 };
 

@@ -1,2 +1,33 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+
+.hexagon-container {
+    position: relative;
+    width: 150px; /* Adjust size as needed */
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hexagon-border {
+    
+    width: 100%;
+    
+    background: offwhite; /* Border color */
+    clip-path: polygon(25% 0%, 75% 0%, 80% 50%, 75% 100%, 25% 100%, 20% 50%);
+}
+
+.hexagon-content {
+    position: absolute;
+    width: 90%; /* Slightly smaller to create a border effect */
+    height: 90%;
+    background: red; /* Inner hexagon color */
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+}
+

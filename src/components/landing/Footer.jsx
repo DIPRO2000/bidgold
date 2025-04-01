@@ -1,54 +1,67 @@
-import React from "react";
+import React from 'react';
+import { FaFacebookF, FaInstagram, FaTwitter, FaYelp } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="relative w-full overflow-hidden pt-[2.5cm]">
-      {/* Help Image */}
-      <img 
-        src="/landingassets/Help.svg" 
-        alt="Help" 
-        className="absolute top-0 left-0 w-full h-auto z-2" 
-      />
+    <><div className=' text-black py-6 px-4 md:px-12 flex justify-center dark:bg-[#2D2D2D] bg-white'>
+        
+    <footer className="bg-gray-100 text-black py-6 px-4 w-[84%] md:px-12 dark:bg-[#5D5D5D]">
+          {/* Top Section */}
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 border-b pb-4">
+              {/* Address & Contact */}
+              <div>
+                  <h2 className="font-bold">ADDRESS</h2>
+                  <p>2381 La Mirada Dr. Vista, CA 92081</p>
+                  <h2 className="font-bold mt-4">CONTACT</h2>
+                  <p>info@mealprepsundaysandiego.com</p>
+                  <h2 className="font-bold mt-4">PHONE</h2>
+                  <p>(888) 632-5918</p>
+              </div>
 
-<button 
-  onClick={() => console.log("Help button clicked")} 
-  className="absolute font-bold rounded-lg shadow-lg cursor-pointer transition-all"
-  style={{ 
-    top: "10vh", left: "86vw", transform: "translate(-50%, -50%)",
-    padding: "clamp(0.8rem, 1.5vw, 2rem) clamp(2rem, 3vw, 4rem)", 
-    fontSize: "clamp(0.8rem, 1.2vw, 1.5rem)",
-    backgroundColor: "white", color: "#166534",
-    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.2)", zIndex: 3
-  }}
-  onMouseDown={e => Object.assign(e.target.style, { backgroundColor: "#0b3d0b", color: "white" })}
-  onMouseUp={e => Object.assign(e.target.style, { backgroundColor: "white", color: "#166534" })}
->
-  GET HELP
-</button>
+              {/* Links */}
+              <div>
+                  <h2 className="font-bold">MY ACCOUNT</h2>
+                  <ul className="space-y-2">
+                      <li>Blogs</li>
+                      <li>About Us</li>
+                      <li>FAQ</li>
+                  </ul>
+              </div>
 
+              {/* Social Icons */}
+              <div className="flex flex-col">
+                  <span className="font-bold">Follow Us!</span>
+                  <div className="flex gap-3 mt-2">
+                      <FaFacebookF className="text-xl cursor-pointer" />
+                      <FaInstagram className="text-xl cursor-pointer" />
+                      <FaTwitter className="text-xl cursor-pointer" />
+                      <FaYelp className="text-xl cursor-pointer" />
+                  </div>
+              </div>
+          </div>
 
+          {/* Bottom Section */}
+          <div className="flex flex-col md:flex-row justify-between items-center text-sm mt-4 px-4">
+              <div className="flex gap-4">
+                  <span>Privacy</span>
+                  <span>Terms and Conditions</span>
+              </div>
+              <p className="text-center md:text-right mt-2 md:mt-0">
+                  Betting App San Diego 2023 © All rights reserved.
+              </p>
+          </div>
+      </footer>
+      
 
-      {/* Footer Image */}
-      <img 
-        src="/landingassets/Footer Image.svg" 
-        alt="Footer" 
-        className="w-full h-auto block" 
-      />
+<div className="absolute -left-8 mt-40 hidden md:block">
+  <img
+    src="Shades.svg"
+    alt="random"
+    className="w-full h-full rotate-[309.27deg]"
+  />
+</div>
 
-      {/* Footer Text */}
-      <img 
-        src="/landingassets/Footer.svg" 
-        alt="FooterTxt" 
-        className="absolute left-1/2 top-[calc(2.5cm+50%)] transform -translate-x-1/2 -translate-y-1/2 max-w-[80%] h-auto z-3" 
-      />
-
-      {/* Shades2 Image */}
-      <img 
-        src="/landingassets/Shades-2.svg" 
-        alt="Shades" 
-        className="absolute right-0 bottom-0 w-[5%] h-auto z-3"
-      />
-    </footer>
+      </div></>
   );
 };
 

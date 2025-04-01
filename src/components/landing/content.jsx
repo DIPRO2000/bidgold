@@ -1,86 +1,53 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 const Content = () => {
-  const navigate = useNavigate();
-  const betHandler=()=>{
-      const token=localStorage.getItem("token");
-      if(!token)
-      {
-        alert("PLEASE LOG IN");
-        navigate("/login");
-      }
-      else
-      {
-        alert("SUCCESSFUL");
-      }  
-  }
-
-
   return (
-    <section className="w-full relative overflow-hidden">
-      {/* Main Image (19% cut off from the top) */}
-      <img 
-        src="/landingassets/Image.svg" 
-        alt="Main Image" 
-        className="w-full h-auto translate-y-[-19%]"
-      />
-
-      {/* Text Image (Top-left, significantly bigger, compensating for cutoff) */}
-      <img 
-        src="/landingassets/Text.svg" 
-        alt="Text" 
-        className="absolute top-[5%] left-[3%] w-[55%] h-auto"
-      />
-
-      {/* Buttons Container */}
-      <div className="absolute flex gap-8"  
-        style={{ 
-          bottom: "41.8%",  // Distance from bottom
-          left: "3.2%",    // Distance from left
-        }}
-      >
-        {/* Bet Now Button */}
-        <button 
-          className="px-6 py-3 text-white font-bold cursor-pointer rounded-md shadow-md transition-all"
+    <div>
+      <div className="relative w-full h-[33vh] md:h-96 flex flex-col text-black text-3xl font-bold">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundColor: "#168534", // Green color
-            width: "164.4px", height: "73.9px",  // Adjust button size 
+            backgroundImage: "url('/loginimg.svg')",
+            backgroundPosition: "center bottom", // Crops the top half
+            filter: "brightness(0.7)", // Fades the image
           }}
-          onMouseDown={e => e.target.style.backgroundColor = "#0b3d0b"}
-          onMouseUp={e => e.target.style.backgroundColor = "#168534"}
-          onClick={betHandler}
-        >
-          BET NOW
-        </button>
+        ></div>
 
-        {/* Explore Button */}
-        <button 
-          className="px-6 py-3 bg-white text-black cursor-pointer font-bold rounded-md shadow-md border border-black transition-all"
-          style={{
-            width: "164.4px", height: "73.9px", left:"%0",  // Adjust button size
-          }}
-          onMouseDown={e => e.target.style.backgroundColor = "#dcdcdc"}
-          onMouseUp={e => e.target.style.backgroundColor = "white"}
-        >
-          EXPLORE
-        </button>
+        {/* Transparent Layer */}
+        <div className="absolute inset-0 bg-white opacity-50"></div>
+
+        {/* Text Content */}
+        <div className="relative z-10 px-4 text-center">
+          <h1 className="text-3xl md:text-5xl m-4 md:m-8">UEFA Champions League 2024</h1>
+          <p className="text-base md:text-xl m-4 md:m-8">Manchester United vs Real Madrid</p>
+        </div>
       </div>
-
-      {/* Stats Image (60% width, centered, overlapping the bottom of Image) */}
-      <img 
-        src="/landingassets/Stats.svg" 
-        alt="Stats" 
-        className="absolute left-1/2 w-[60%] h-auto translate-x-[-50%] top-[81%] translate-y-[-50%]"
-      />
-
-      {/* Shades Image (Small, at the bottom left, 50% out of the screen horizontally) */}
-      <img 
-        src="/landingassets/Shades.svg" 
-        alt="Shades" 
-        className="absolute bottom-0 left-0 w-16 h-auto translate-x-[-40%]"
-      />
-    </section>
+      
+      {/* Hexagon Stats Box */}
+      <div className="flex justify-center mt-6 md:mt-auto">
+        <div className="relative w-[90%] md:w-[60%] lg:w-[50%]">
+          <div className="relative bg-[#208C53] bottom-15 rounded-xl shadow-sm shadow-black text-white p-4 md:p-6 border-4 md:border-8 border-gray-100 flex flex-wrap md:flex-row justify-center text-center gap-4 md:gap-10">
+            <div className="w-1/2 md:w-auto">
+              <p className="text-lg md:text-3xl font-bold">25.1k</p>
+              <p className="text-xs md:text-base">BET PLAYERS</p>
+            </div>
+            <div className="w-1/2 md:w-auto">
+              <p className="text-lg md:text-3xl font-bold">574+</p>
+              <p className="text-xs md:text-base">ALL SPORTS</p>
+            </div>
+            <div className="w-1/2 md:w-auto">
+              <p className="text-lg md:text-3xl font-bold">3201</p>
+              <p className="text-xs md:text-base">STREAMING</p>
+            </div>
+            <div className="w-1/2 md:w-auto">
+              <p className="text-lg md:text-3xl font-bold">10k+</p>
+              <p className="text-xs md:text-base">PRICES</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
