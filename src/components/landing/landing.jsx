@@ -3,7 +3,7 @@ import GuestNav from "../authnav"; // Ensure correct path
 import Content from "./content";
 import MatchFixtures from "./fixtures"; // Ensure correct path
 import BettingDashboard from "./bettings";
-import Feedback from "./feedback";
+
 import Footer from "./Footer";
 import Body from "./body";
 import Authnav from "../authnav"; // Ensure correct path
@@ -20,7 +20,7 @@ function Landing() {
       <MatchFixtures />
       <Body />
       <BettingDashboard />
-      <Feedback />
+   
       <HelpBanner />
       <Footer />
     </div>
