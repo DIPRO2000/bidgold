@@ -1,54 +1,75 @@
 import axios from "axios";
 import dotenv from "dotenv";
 
+
 dotenv.config();
 
 const API_URL = "https://api.the-odds-api.com/v4/sports/upcoming/odds";
 const API_KEY = process.env.API_KEY;
 
-// ✅ Allowed Sports
 const ALLOWED_SPORTS = ["soccer", "baseball", "volleyball", "hockey"];
 
-// ✅ Prioritized Top Leagues (Will Appear First)
 const TOP_LEAGUES = [
-    "FIFA", "UEFA Champions League", "Premier League", "La Liga", "Bundesliga", "Serie A", "Ligue 1", "Eredivisie", // ⚽ Soccer
-    "MLB", "NPB", "KBO", // ⚾ Baseball
-    "NHL", "KHL", "SHL", "Liiga", // 🏒 Hockey
-    "FIVB", "CEV Champions League", "Volleyball Nations League" // 🏐 Volleyball
+  "FIFA", "UEFA Champions League", "Premier League", "La Liga", "Bundesliga", "Serie A", "Ligue 1", "Eredivisie",
+  "MLB", "NPB", "KBO",
+  "NHL", "KHL", "SHL", "Liiga",
+  "FIVB", "CEV Champions League", "Volleyball Nations League"
 ];
 
+const REGIONS = ["eu", "uk", "us"];
+
 export const getOdds = async () => {
-    try {
-        const response = await axios.get(API_URL, {
-            params: {
-                apiKey: API_KEY,
-                regions: "eu", // ✅ Europe only
-                markets: "h2h",
-                oddsFormat: "decimal",
-                dateFormat: "iso",
-            }
-        });
+  try {
+    const allRegionData = await Promise.all(
+      REGIONS.map(region =>
+        axios.get(API_URL, {
+          params: {
+            apiKey: API_KEY,
+            regions: region,
+            markets: "h2h",
+            oddsFormat: "decimal",
+            dateFormat: "iso",
+          }
+        }).then(res => res.data)
+          .catch(err => {
+            console.error(`❌ Error fetching data for region ${region}:`, err.message);
+            return [];
+          })
+      )
+    );
 
-        let allGames = response.data;
-        console.log("🔹 API Response:", allGames.length, "matches received");
+    // 🔄 Combine all region data into a single array
+    let combinedMatches = allRegionData.flat();
 
-        // ✅ Filter for allowed sports only
-        let filteredSports = allGames.filter((game) =>
-            ALLOWED_SPORTS.some(sport => game.sport_key.includes(sport))
-        );
+    console.log(`🔹 Total Matches Fetched: ${combinedMatches.length}`);
 
-        console.log("✅ Filtered Matches:", filteredSports.length, "matches found");
+    // ✅ Deduplicate matches based on `id`
+    const uniqueMatchesMap = new Map();
+    combinedMatches.forEach(match => {
+      if (!uniqueMatchesMap.has(match.id)) {
+        uniqueMatchesMap.set(match.id, match);
+      }
+    });
 
-        // ✅ Sort: Move Top Leagues to the Front
-        filteredSports.sort((a, b) => {
-            const aPriority = TOP_LEAGUES.some(league => a.sport_title.includes(league)) ? 1 : 0;
-            const bPriority = TOP_LEAGUES.some(league => b.sport_title.includes(league)) ? 1 : 0;
-            return bPriority - aPriority; // Move top leagues first
-        });
+    let uniqueMatches = Array.from(uniqueMatchesMap.values());
 
-        return filteredSports.length > 0 ? filteredSports : [{ message: "No upcoming games for soccer, baseball, volleyball, or hockey." }];
-    } catch (error) {
-        console.error("❌ Error fetching odds:", error.message);
-        return [{ error: "Failed to fetch data" }];
-    }
+    // ✅ Filter for allowed sports only
+    const filteredMatches = uniqueMatches.filter((game) =>
+      ALLOWED_SPORTS.some(sport => game.sport_key.includes(sport))
+    );
+
+    console.log("✅ Filtered Matches:", filteredMatches.length);
+
+    // ✅ Prioritize top leagues
+    filteredMatches.sort((a, b) => {
+      const aPriority = TOP_LEAGUES.some(league => a.sport_title.includes(league)) ? 1 : 0;
+      const bPriority = TOP_LEAGUES.some(league => b.sport_title.includes(league)) ? 1 : 0;
+      return bPriority - aPriority;
+    });
+
+    return filteredMatches.length > 0 ? filteredMatches : [{ message: "No upcoming games for allowed sports." }];
+  } catch (error) {
+    console.error("❌ Error fetching odds:", error.message);
+    return [{ error: "Failed to fetch data" }];
+  }
 };
