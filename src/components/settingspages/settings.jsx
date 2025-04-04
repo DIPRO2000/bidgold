@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import Mainav from "../nav";
+import NavbarManager from "../NavManager";
 import Content from "./content";
 import ButtonBar from "../butons";
 import DashboardCards from "./money";
 import EditProfile from "./form1";
 import SidebarButtons from "./sidebuttons";
-
-
+import Mainav from "../nav";
 function Settings() {
   const [selectedTab, setSelectedTab] = useState("personal");
 
   return (
     <div className="pt-20">
-      <Mainav />
+      <NavbarManager />
       <Content />
       <ButtonBar />
       <DashboardCards />

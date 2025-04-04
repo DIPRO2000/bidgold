@@ -13,7 +13,7 @@ import Sports from "./sports";
 function Landing() {
   return (
     <div className="pt-20 dark:bg-[#2D2D2D]"> {/* Added padding to prevent content overlap */}
-      <Authnav />
+      <GuestNav />
 
       <Content />
       <Sports />
