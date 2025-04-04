@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import Body from "./body";
 import Authnav from "../authnav"; // Ensure correct path
 import HelpBanner from "./gethelp";
+import Sports from "./sports";
 
 function Landing() {
   return (
@@ -15,7 +16,7 @@ function Landing() {
       <Authnav />
 
       <Content />
-      
+      <Sports />
       <MatchFixtures />
       <Body />
       <BettingDashboard />
