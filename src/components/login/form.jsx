@@ -25,8 +25,7 @@ function Form() {
         throw new Error(data.message || "Login failed");
       }
 
-      // Store JWT token and user data
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.token);                // Store JWT token and user data
       localStorage.setItem("user", JSON.stringify(data.user)); // Store user info
 
       alert("Login Successful!");
