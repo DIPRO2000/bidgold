@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Switch from "./toggle";
 
@@ -6,6 +7,7 @@ const Mainav = ({ user, setUser }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const navigate=useNavigate();
 
   const dropdownRef = useRef(null);
   const profileDropdownRef = useRef(null);
@@ -33,9 +35,13 @@ const Mainav = ({ user, setUser }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     alert("Log out Successfully");
-    window.location.reload();
+    navigate("/");
     setUser(null);
   };
+
+  const userProfile=()=>{
+    navigate("/settings");
+  }
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-[#47B67C] text-white px-6 py-6 shadow-lg z-50">
@@ -85,8 +91,14 @@ const Mainav = ({ user, setUser }) => {
             {profileDropdownOpen && (
               <div className="absolute right-0 mt-2 bg-white text-black rounded shadow-lg w-40">
                 <button
-                  onClick={logout}
+                  onClick={userProfile}
                   className="block w-full text-left px-4 py-2 hover:bg-gray-200"
+                >
+                  User Profile
+                </button>
+                <button
+                  onClick={logout}
+                  className="block w-full text-left px-4 py-2 hover:bg-red-500"
                 >
                   Log Out
                 </button>

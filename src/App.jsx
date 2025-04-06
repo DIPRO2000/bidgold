@@ -6,7 +6,17 @@ import Register2 from './components/register/register2';
 import Register3 from './components/register/register3';
 import Settings from './components/settingspages/settings';
 import LoginAtgent from './components/agent/login/login';
+<<<<<<< HEAD
 import Agent from './components/agent/agentmain/agent';
+=======
+import BetHistory from './components/bethistory/bethistory';
+import TransactionHistory from "./components/bethistory/pages/TransactionHistory";
+import Deposit from "./components/bethistory/pages/Deposit";
+
+//import BetHistory from "./components/bethistory/bethistory";
+
+
+>>>>>>> 0f3ad66754d800bb8fd0f8ab270df2903f55d05b
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
@@ -16,6 +26,9 @@ function App() {
       <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/bethistory" element={<BetHistory />} />
+          <Route path="/components/bethistory/pages/TransactionHistory" element={<TransactionHistory />} />
+          <Route path="/components/bethistory/pages/Deposit" element={<Deposit />} />
           <Route path="/register" element={<Register />} />  
           <Route path="/register2" element={<Register2 />} /> 
           <Route path="/register3" element={<Register3 />} />
