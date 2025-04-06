@@ -6,7 +6,7 @@ import Register2 from './components/register/register2';
 import Register3 from './components/register/register3';
 import Settings from './components/settingspages/settings';
 import LoginAtgent from './components/agent/login/login';
-
+import Agent from './components/agent/agentmain/agent';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
@@ -21,7 +21,7 @@ function App() {
           <Route path="/register3" element={<Register3 />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/agent/login" element={<LoginAtgent />} />
-          
+          <Route path="/agent" element={<Agent />} />
       </Routes>
     </Router>
   );

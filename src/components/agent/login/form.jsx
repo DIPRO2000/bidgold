@@ -15,7 +15,7 @@ function Form() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }), 
+        body: JSON.stringify({ username, password }),
       });
 
       const data = await response.json();
@@ -27,10 +27,10 @@ function Form() {
 
       // Store JWT token and user data
       localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user)); // Store user info
+      localStorage.setItem("user", JSON.stringify(data.user));
 
       alert("Login Successful!");
-      window.location.href = "/"; // Redirect after login (change as needed)
+      window.location.href = "/agent"; // Redirect to /agent
     } catch (err) {
       setError(err.message);
     }
