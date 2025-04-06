@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const ProfileForm = () => {
-  const userStr=localStorage.getItem("user");
-  const user=JSON.parse(userStr);
-  const userId=user.id;
+  const userStr = localStorage.getItem("user");
+  const user = userStr ? JSON.parse(userStr) : null;
+
+  const userId = user?.id;
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -12,6 +13,8 @@ const ProfileForm = () => {
     phone: "",
     gender: "",
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -23,40 +26,41 @@ const ProfileForm = () => {
       alert("Please fill at least one field to save changes.");
       return;
     }
-  
+
+    setIsSubmitting(true);
+
     try {
-      const res = await axios.patch("http://localhost:3000/api/user/update", {
+      await axios.patch("http://localhost:3000/api/user/update", {
         userId,
         ...form,
       });
-  
+
       alert("Changes saved successfully.");
-  
-      // Check and update localStorage if firstName or lastName changed
-      const userStr = localStorage.getItem("user");
-      const user = JSON.parse(userStr);
-  
+
+      const updatedUser = { ...user };
       let updated = false;
+
       if (form.firstName && form.firstName !== user.firstName) {
-        user.firstName = form.firstName;
+        updatedUser.firstName = form.firstName.trim();
         updated = true;
       }
       if (form.lastName && form.lastName !== user.lastName) {
-        user.lastName = form.lastName;
+        updatedUser.lastName = form.lastName.trim();
         updated = true;
       }
-  
+
       if (updated) {
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify(updatedUser));
         window.location.reload();
       }
-  
+
     } catch (err) {
       console.error(err);
       alert("Something went wrong.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
-  
 
   const fields = [
     { label: "FIRST NAME", name: "firstName", placeholder: "Enter First Name for Change" },
@@ -66,11 +70,17 @@ const ProfileForm = () => {
     { label: "GENDER", name: "gender", placeholder: "Enter Gender for Change" },
   ];
 
+  if (!user) {
+    return <div className="p-6 text-red-600 font-semibold">User not logged in.</div>;
+  }
+
   return (
     <div className="flex-1 flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-10 p-6 w-full rounded-lg">
       <div>
-        <div className="w-40 h-40 md:w-64 md:h-64 bg-gray-300 rounded-full flex items-center justify-center"></div>
-        <div className="w-full justify-center items-center flex flex-col">
+        <div className="w-40 h-40 md:w-64 md:h-64 bg-gray-300 rounded-full flex items-center justify-center">
+          {/* Placeholder for profile image */}
+        </div>
+        <div className="w-full flex justify-center items-center flex-col">
           <button className="flex justify-center w-2/5 bg-[#D9D9D9] p-1 font-bold rounded-lg mt-4 hover:bg-green-600">
             EDIT IMAGE
           </button>
@@ -85,7 +95,7 @@ const ProfileForm = () => {
             </label>
             <input
               name={name}
-              type={name=="dob"? "date" : "text"}
+              type={name === "dob" ? "date" : "text"}
               value={form[name]}
               onChange={handleChange}
               placeholder={placeholder}
@@ -96,9 +106,12 @@ const ProfileForm = () => {
         <div className="col-span-1 md:col-span-2 mt-4">
           <button
             onClick={handleSubmit}
-            className="bg-green-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-green-700"
+            disabled={isSubmitting}
+            className={`bg-green-600 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-green-700 ${
+              isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
-            Save Changes
+            {isSubmitting ? "Saving..." : "Save Changes"}
           </button>
         </div>
       </div>

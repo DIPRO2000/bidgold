@@ -5,7 +5,7 @@ import ButtonBar from "../butons";
 import DashboardCards from "./money";
 import EditProfile from "./form1";
 import SidebarButtons from "./sidebuttons";
-import Mainav from "../nav";
+
 function Settings() {
   const [selectedTab, setSelectedTab] = useState("personal");
 
