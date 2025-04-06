@@ -6,15 +6,13 @@ import Register2 from './components/register/register2';
 import Register3 from './components/register/register3';
 import Settings from './components/settingspages/settings';
 import LoginAgent from './components/agent/login/login';
+import Agent from './components/agent/agentmain/agent';
+
 import BetHistory from './components/bethistory/bethistory';
 import TransactionHistory from "./components/bethistory/pages/TransactionHistory";
 import Deposit from "./components/bethistory/pages/Deposit";
 
-//import BetHistory from "./components/bethistory/bethistory";
-
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 
 function App() {
   return (
@@ -30,7 +28,7 @@ function App() {
           <Route path="/register3" element={<Register3 />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/agent/login" element={<LoginAgent />} />
-          
+          <Route path="/agent" element={<Agent />} />
       </Routes>
     </Router>
   );
