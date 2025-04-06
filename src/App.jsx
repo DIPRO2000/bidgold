@@ -5,7 +5,7 @@ import Register from './components/register/register1';
 import Register2 from './components/register/register2';
 import Register3 from './components/register/register3';
 import Settings from './components/settingspages/settings';
-import LoginAtgent from './components/agent/login/login';
+import LoginAgent from './components/agent/login/login';
 import BetHistory from './components/bethistory/bethistory';
 import TransactionHistory from "./components/bethistory/pages/TransactionHistory";
 import Deposit from "./components/bethistory/pages/Deposit";
@@ -23,13 +23,13 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/bethistory" element={<BetHistory />} />
-          <Route path="/components/bethistory/pages/TransactionHistory" element={<TransactionHistory />} />
-          <Route path="/components/bethistory/pages/Deposit" element={<Deposit />} />
+          <Route path="/TransactionHistory" element={<TransactionHistory />} />
+          <Route path="/Deposit" element={<Deposit />} />
           <Route path="/register" element={<Register />} />  
           <Route path="/register2" element={<Register2 />} /> 
           <Route path="/register3" element={<Register3 />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/agent/login" element={<LoginAtgent />} />
+          <Route path="/agent/login" element={<LoginAgent />} />
           
       </Routes>
     </Router>

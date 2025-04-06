@@ -9,8 +9,8 @@ function ButtonBar() {
 
   const buttons = [
     { label: "Bet History", route: "/bethistory" },
-    { label: "Transaction History", route: "/components/bethistory/pages/TransactionHistory" },
-    { label: "Deposit", route: "/components/bethistory/pages/Deposit" },
+    { label: "Transaction History", route: "/TransactionHistory" },
+    { label: "Deposit", route: "/Deposit" },
     { label: "Withdrawal", route: "/withdrawal" },
     { label: "Settings", route: "/settings" },
   ];
