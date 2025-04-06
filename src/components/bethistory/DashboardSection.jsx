@@ -30,7 +30,7 @@ export default function DashboardSection() {
     <div className="p-8">
       <div className="w-full flex flex-col items-center lg:items-start shadow-lg rounded-xl p-6 bg-[#208C53] dark:bg-[#4C4C4C]">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">
-          {[...cardData, ...cardData].map((item, index) => (
+          {cardData.map((item, index) => (
             <div
               key={index}
               className="bg-[#47B67C] dark:bg-[#2D2D2D] p-6 rounded-xl shadow-md flex flex-col items-start space-y-2 w-full"

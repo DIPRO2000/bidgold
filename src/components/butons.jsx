@@ -11,7 +11,7 @@ function ButtonBar() {
     { label: "Bet History", route: "/bethistory" },
     { label: "Transaction History", route: "/TransactionHistory" },
     { label: "Deposit", route: "/Deposit" },
-    { label: "Withdrawal", route: "/withdrawal" },
+    { label: "Withdrawal", route: "/Withdrawal" },
     { label: "Settings", route: "/settings" },
   ];
 

@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, {  useState } from "react";
 import AuthNav from "../../authnav";
 import NavbarManager from "../../NavManager";
 import ButtonBar from "../../butons";
@@ -30,7 +30,7 @@ function TransactionHistory() {
           <div className="flex items-center space-x-4">
             <img src="/user-icon.svg" alt="User" className="w-16 h-16" />
             <div>
-              <h1 className="text-5xl font-bold">{user.firstName} {user.lastName}</h1>
+              {/* <h1 className="text-5xl font-bold">{user.firstName} {user.lastName}</h1> */}
               <p className="text-2xl font-semibold">BETID: ABCD1234</p>
               <p className="text-xl font-medium">
                 TOTAL TRANSACTIONS: 68 | SUCCESSFUL: 65
