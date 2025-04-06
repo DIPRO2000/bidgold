@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import AuthNav from "../../authnav";
+import NavbarManager from "../../NavManager";
 import ButtonBar from "../../butons";
 import DashboardSection from "./../DashboardSection";
 import { Clock4 } from "lucide-react";
 
 function TransactionHistory() {
   const [active, setActive] = useState("Transaction History");
+  const userStr = localStorage.getItem("user");      // get the string
+  const user = JSON.parse(userStr);                  // convert string to object
 
   const transactionItems = Array.from({ length: 10 }).map(() => ({
     time: "2:15 PM",
@@ -27,7 +30,7 @@ function TransactionHistory() {
           <div className="flex items-center space-x-4">
             <img src="/user-icon.svg" alt="User" className="w-16 h-16" />
             <div>
-              <h1 className="text-5xl font-bold">JOHN DOE</h1>
+              <h1 className="text-5xl font-bold">{user.firstName} {user.lastName}</h1>
               <p className="text-2xl font-semibold">BETID: ABCD1234</p>
               <p className="text-xl font-medium">
                 TOTAL TRANSACTIONS: 68 | SUCCESSFUL: 65
@@ -38,7 +41,7 @@ function TransactionHistory() {
       </div>
 
       {/* Navigation */}
-      <AuthNav />
+      <NavbarManager />
       <ButtonBar active={active} setActive={setActive} />
       <DashboardSection />
 

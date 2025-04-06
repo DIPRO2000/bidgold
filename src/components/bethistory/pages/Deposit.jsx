@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import AuthNav from "../../authnav";
+import NavbarManager from "../../NavManager";
 import ButtonBar from "../../butons";
 import DashboardSection from "./../DashboardSection";
 import { Wallet } from "lucide-react";
 
 function Deposit() {
   const [active, setActive] = useState("Deposit");
+  const userStr = localStorage.getItem("user");      // get the string
+  const user = JSON.parse(userStr);                  // convert string to object
 
   return (
     <div className="pt-20 dark:bg-[#2D2D2D] bg-white min-h-screen transition-all">
@@ -18,7 +21,7 @@ function Deposit() {
           <div className="flex items-center space-x-4">
             <img src="/user-icon.svg" alt="User" className="w-16 h-16" />
             <div>
-              <h1 className="text-5xl font-bold">JOHN DOE</h1>
+              <h1 className="text-5xl font-bold">{user.firstName} {user.lastName}</h1>
               <p className="text-2xl font-semibold">BETID: ABCD1234</p>
               <p className="text-xl font-medium">
                 WINNING BET: 55% | LOSING BET: 45%
@@ -29,7 +32,7 @@ function Deposit() {
       </div>
 
       {/* Navigation */}
-      <AuthNav />
+      <NavbarManager />
       <ButtonBar active={active} setActive={setActive} />
       <DashboardSection />
 

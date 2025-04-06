@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import AuthNav from "../authnav";
+import AuthNav from "../authnav";   //Don't use AuthNav always use NavbarManager
+import NavbarManager from "../../NavManager";
 import ButtonBar from "../butons";
 import DashboardSection from "./DashboardSection";
 import { Clock4 } from "lucide-react";
@@ -40,7 +41,7 @@ function BetHistory() {
       </div>
 
       {/* Navigation */}
-      <AuthNav />
+      <NavbarManager/>
       <ButtonBar active={active} setActive={setActive} />
 
       {/* Dashboard Section */}
