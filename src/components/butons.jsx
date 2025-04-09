@@ -1,7 +1,6 @@
 // components/ButtonBar.jsx
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-//import TransactionHistory from "./components/bethistory/pages/TransactionHistory";
 
 function ButtonBar() {
   const navigate = useNavigate();
@@ -10,8 +9,6 @@ function ButtonBar() {
   const buttons = [
     { label: "Bet History", route: "/bethistory" },
     { label: "Transaction History", route: "/TransactionHistory" },
-    { label: "Deposit", route: "/Deposit" },
-    { label: "Withdrawal", route: "/Withdrawal" },
     { label: "Settings", route: "/settings" },
   ];
 

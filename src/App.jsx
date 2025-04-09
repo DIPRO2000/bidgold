@@ -10,8 +10,8 @@ import Agent from './components/agent/agentmain/agent';
 
 import BetHistory from './components/bethistory/bethistory';
 import TransactionHistory from "./components/bethistory/pages/TransactionHistory";
-import Deposit from "./components/bethistory/pages/Deposit";
-import Withdrawal from "./components/bethistory/pages/Withdrawal";
+// import Deposit from "./components/bethistory/pages/Deposit";
+// import Withdrawal from "./components/bethistory/pages/Withdrawal";
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -23,8 +23,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/bethistory" element={<BetHistory />} />
           <Route path="/TransactionHistory" element={<TransactionHistory />} />
-          <Route path="/Deposit" element={<Deposit />} />
-          <Route path="/Withdrawal" element={<Withdrawal />} />
+          {/* <Route path="/Deposit" element={<Deposit />} /> */}
+          {/* <Route path="/Withdrawal" element={<Withdrawal />} /> */}
 
           <Route path="/register" element={<Register />} />  
           <Route path="/register2" element={<Register2 />} /> 
