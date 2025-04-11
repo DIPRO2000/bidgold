@@ -4,20 +4,12 @@ import Switch from "./toggle";
 
 const Mainav = ({ user, setUser }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
-  const dropdownRef = useRef(null);
   const profileDropdownRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
-      ) {
-        setDropdownOpen(false);
-      }
       if (
         profileDropdownRef.current &&
         !profileDropdownRef.current.contains(event.target)
@@ -48,21 +40,6 @@ const Mainav = ({ user, setUser }) => {
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 text-sm">
           <a href="/" className="font-semibold hover:text-gray-200 active:text-black">Home</a>
-          <div className="relative" ref={dropdownRef}>
-            <button
-              className="font-semibold flex items-center gap-1 hover:text-gray-200 active:text-black"
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-            >
-              All Bets <ChevronDown size={16} />
-            </button>
-            {dropdownOpen && (
-              <div className="absolute left-0 mt-2 bg-white text-black rounded shadow-lg w-40">
-                <a href="#" className="block px-4 py-2 hover:bg-gray-200">Live Bets</a>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-200">Upcoming Bets</a>
-              </div>
-            )}
-          </div>
-          <a href="#" className="font-semibold hover:text-gray-200 active:text-black">FAQ</a>
           <a href="#" className="font-semibold hover:text-gray-200 active:text-black">Dashboard</a>
         </div>
 
@@ -109,21 +86,6 @@ const Mainav = ({ user, setUser }) => {
       {isOpen && (
         <div className="md:hidden mt-4 bg-white dark:bg-[#7C7C7C] text-black rounded-lg shadow-lg px-6 py-4 space-y-3">
           <a href="/" className="block font-medium hover:text-[#47B67C]">Home</a>
-          <div className="relative">
-            <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="w-full text-left font-medium flex items-center justify-between"
-            >
-              All Bets <ChevronDown size={16} />
-            </button>
-            {dropdownOpen && (
-              <div className="mt-2 pl-4">
-                <a href="#" className="block py-1 hover:text-[#47B67C]">Live Bets</a>
-                <a href="#" className="block py-1 hover:text-[#47B67C]">Upcoming Bets</a>
-              </div>
-            )}
-          </div>
-          <a href="#" className="block font-medium hover:text-[#47B67C]">FAQ</a>
           <a href="#" className="block font-medium hover:text-[#47B67C]">Dashboard</a>
 
           {/* Mobile User Info */}
