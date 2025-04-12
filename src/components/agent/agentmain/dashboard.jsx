@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Wallet, DollarSign, PiggyBank, Send } from "lucide-react";
-
+import { Link } from 'react-router-dom';
+import memberData from '../../../data/memberData';
 function Dashboard() {
   const navigate=useNavigate();
   const data = [
@@ -11,80 +12,58 @@ function Dashboard() {
     { icon: <Send size={28} />, title: "Total payout", value: "$568.14" },
   ];
 
-  const members = [
-    { name: 'JOHN SMITH', joined: 'DEC 12,2024', transactions: 234, status: 'ACTIVE' },
-    { name: 'JOHN SMITH', joined: 'DEC 12,2024', transactions: 234, status: 'INACTIVE' },
-    { name: 'JOHN SMITH', joined: 'DEC 12,2024', transactions: 234, status: 'ACTIVE' },
-    { name: 'JOHN SMITH', joined: 'DEC 12,2024', transactions: 234, status: 'ACTIVE' },
-  ];
-
-  const userCreation=()=>
-  {
-    navigate("/register");
-  }
-
   return (
     <div className="container mx-auto px-4 py-8">
-      {/* Top Cards */}
-      <div className="bg-[#208C53] dark:bg-[#2D2D2D] rounded-xl shadow-lg p-6 mb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="bg-[#208C53] rounded-xl shadow-lg p-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {data.map((item, index) => (
-            <div
-              key={index}
-              className="bg-[#47B67C] shadow-md shadow-black p-6 rounded-xl  flex flex-col items-start space-y-2"
-            >
-              <div className="text-[#F6BA02]">{item.icon}</div>
+            <div key={index} className="bg-[#47B67C] shadow-md p-6 rounded-xl">
+              <div className="text-[#FFC107] mb-2">{item.icon}</div>
               <h3 className="text-white font-semibold text-lg">{item.title}</h3>
-              <p className="text-[#F6BA02] text-md">{item.value}</p>
+              <p className="text-[#FFC107] text-md">{item.value}</p>
             </div>
           ))}
         </div>
       </div>
 
-        {/*USER CREATION BUTTON*/}
-      <div>
-        <h1>USER CREATION BUTTON:<button onClick={userCreation} className="p-3 rounded-2xl cursor-pointer hover:bg-green-700 bg-green-500">USER CREATE</button></h1>
-      </div>
-
-      {/* Active Members Table */}
-      <div className="bg-white  dark:bg-[#7C7C7C] rounded-xl shadow-lg p-6">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-          <h2 className="text-2xl font-bold mb-2 sm:mb-0">ACTIVE MEMBERS</h2>
-          <button className="text-blue-600 hover:text-blue-800 font-medium">
-            VIEW ALL
-          </button>
+      <div className="bg-white rounded-xl shadow-lg p-6">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold text-[#208C53]">ACTIVE MEMBERS</h2>
+          <button className="text-blue-600 hover:text-blue-800 font-medium">VIEW ALL</button>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border dark:bg-[#5D5D5D] border-gray-200 rounded-lg">
-            <thead>
-              <tr className="bg-[#D9D9D9] text-black">
-                <th className="text-left py-3 px-4 font-semibold">MEMBER</th>
-                <th className="text-left py-3 px-4 font-semibold">JOINED</th>
-                <th className="text-left py-3 px-4 font-semibold">TRANSACTIONS</th>
-                <th className="text-left py-3 px-4 font-semibold">STATUS</th>
+        <table className="min-w-full bg-white border rounded-lg">
+          <thead className="bg-[#D9D9D9] text-black">
+            <tr>
+              <th className="text-left py-3 px-4">MEMBER</th>
+              <th className="text-left py-3 px-4">JOINED</th>
+              <th className="text-left py-3 px-4">TIME</th>
+              <th className="text-left py-3 px-4">TRANSACTIONS</th>
+              <th className="text-left py-3 px-4">STATUS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {memberData.map((member) => (
+              <tr key={member.id} className="border-b hover:bg-gray-100">
+                <td className="py-3 px-4">
+                  <Link to={`/member/${member.id}`} className="text-blue-600 hover:underline">
+                    {member.name}
+                  </Link>
+                </td>
+                <td className="py-3 px-4">{member.joined}</td>
+                <td className="py-3 px-4">{member.time}</td>
+                <td className="py-3 px-4">{member.transactionsCount}</td>
+                <td className="py-3 px-4">
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                    member.status === 'ACTIVE' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                  }`}>
+                    {member.status}
+                  </span>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {members.map((member, index) => (
-                <tr key={index} className="border-b border-gray-100 hover:bg-gray-50">
-                  <td className="py-3 px-4">{member.name}</td>
-                  <td className="py-3 px-4">{member.joined}</td>
-                  <td className="py-3 px-4">{member.transactions}</td>
-                  <td className="py-3 px-4">
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      member.status === 'ACTIVE'
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-red-100 text-red-800'
-                    }`}>
-                      {member.status}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

@@ -1,12 +1,11 @@
 import React,{useState} from "react";
-import GuestNav from "../authnav"; // Ensure correct path
+
 import Content from "./content";
 import MatchFixtures from "./fixtures"; // Ensure correct path
-import BettingDashboard from "./bettings";
+
 
 import Footer from "./Footer";
-import Body from "./body";
-import Authnav from "../authnav"; // Ensure correct path
+
 import HelpBanner from "./gethelp";
 import NavbarManager from "../NavManager";
 import Sports from "./sports";
@@ -20,8 +19,12 @@ function Landing() {
       <Content />
       <Sports activeSport={activeSport} setActiveSport={setActiveSport}/>
       <MatchFixtures sport={activeSport}/>
+<<<<<<< HEAD
       {/* <Body /> */}
       {/* <BettingDashboard /> */}
+=======
+      
+>>>>>>> 6f607e83782df4872375c72091aa7903203534b7
    
       {/* <HelpBanner /> */}
       <Footer />
