@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Wallet, DollarSign, PiggyBank, Send } from "lucide-react";
 
 function Dashboard() {
+  const navigate=useNavigate();
   const data = [
     { icon: <Wallet size={28} />, title: "Main balance", value: "$121.20" },
     { icon: <DollarSign size={28} />, title: "Total earning", value: "$362.28" },
@@ -15,6 +17,11 @@ function Dashboard() {
     { name: 'JOHN SMITH', joined: 'DEC 12,2024', transactions: 234, status: 'ACTIVE' },
     { name: 'JOHN SMITH', joined: 'DEC 12,2024', transactions: 234, status: 'ACTIVE' },
   ];
+
+  const userCreation=()=>
+  {
+    navigate("/register");
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -32,6 +39,11 @@ function Dashboard() {
             </div>
           ))}
         </div>
+      </div>
+
+        {/*USER CREATION BUTTON*/}
+      <div>
+        <h1>USER CREATION BUTTON:<button onClick={userCreation} className="p-3 rounded-2xl cursor-pointer hover:bg-green-700 bg-green-500">USER CREATE</button></h1>
       </div>
 
       {/* Active Members Table */}

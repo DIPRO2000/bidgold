@@ -14,6 +14,7 @@ import Deposit from "./components/bethistory/pages/Deposit";
 import Withdrawal from "./components/bethistory/pages/Withdrawal";
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AgentAccountForm from './components/fg';
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
           <Route path="/TransactionHistory" element={<TransactionHistory />} />
           <Route path="/Deposit" element={<Deposit />} />
           <Route path="/Withdrawal" element={<Withdrawal />} />
-
+          <Route path="/agent/signup" element={<AgentAccountForm/>} />
           <Route path="/register" element={<Register />} />  
           <Route path="/register2" element={<Register2 />} /> 
           <Route path="/register3" element={<Register3 />} />

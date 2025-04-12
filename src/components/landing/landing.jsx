@@ -20,10 +20,10 @@ function Landing() {
       <Content />
       <Sports activeSport={activeSport} setActiveSport={setActiveSport}/>
       <MatchFixtures sport={activeSport}/>
-      <Body />
-      <BettingDashboard />
+      {/* <Body /> */}
+      {/* <BettingDashboard /> */}
    
-      <HelpBanner />
+      {/* <HelpBanner /> */}
       <Footer />
     </div>
   );

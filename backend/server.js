@@ -7,8 +7,10 @@ import morgan from "morgan";
 
 import authRoutes from "./src/routes/auth.js";      
 import oddsRoutes from "./src/routes/oddsRoutes.js";  // Import new odds route
+import scoreRoutes from "./src/services/livescores.js"  //Import Scores of Live Matches
 import feedbackRoutes from "./src/routes/feedbackRoutes.js"   //Import new Feedbacks
 import userSettingsRoute from "./src/routes/settings.js"      //Import User Edit Settings
+import AgentAuthRoutes from "./src/routes/AgentAuth.js"
 
 
 dotenv.config();
@@ -27,8 +29,10 @@ app.use(morgan("dev"));
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/odds", oddsRoutes);  // New odds route
+app.use("/api/scores",scoreRoutes);
 app.use("/api",feedbackRoutes);    //New Feedbacks from Users
 app.use("/api/user",userSettingsRoute);   //Edit User Profil
+app.use("/api/agent",AgentAuthRoutes);    //Agent Login and Registration
 
 
 
