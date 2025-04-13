@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const MatchCard = ({ league, sport, time, team1, team2, score1, score2, odds, extraValue }) => {
   return (
-    <div className="border rounded-lg p-4 shadow-md w-full md:w-[95%] flex flex-col mx-auto mb-4">
+    <div className="border rounded-lg p-4 shadow-md w-full flex flex-col mb-4">
       <div className="font-bold text-lg mb-2 text-center md:text-left">
         {league} &nbsp;&nbsp;&nbsp;&nbsp; Sport: {sport.toUpperCase()}
       </div>
@@ -76,7 +76,6 @@ const MatchList = ({ sport = "all" }) => {
 
   const filteredMatches = matches.filter((match) => {
     const matchSport = match.sport_key.split("_")[0];
-
     matchesSport = sport === "all" || matchSport === sport;
 
     const now = new Date();
@@ -92,7 +91,8 @@ const MatchList = ({ sport = "all" }) => {
   });
 
   return (
-    <div className="p-4 w-full max-w-5xl mx-auto">
+    <div className="p-4 w-full max-w-7xl mx-auto">
+      {/* Filter Buttons */}
       <div className="flex flex-col md:flex-row gap-2 mb-4 items-center">
         {["All", "Live", "Upcoming"].map((filterType) => (
           <button
@@ -122,36 +122,41 @@ const MatchList = ({ sport = "all" }) => {
         </select>
       </div>
 
-      <div className="overflow-x-auto h-[350px] space-y-4">
-        {filteredMatches.length > 0 ? (
-          filteredMatches.map((match) => {
-            const matchSport = match.sport_key.split("_")[0];
-            const selectedBookmaker = match.bookmakers.find(
-              (bm) => bm.key === bookmaker
-            );
-            return (
-              <MatchCard
-                key={match.id}
-                league={match.sport_title}
-                sport={matchSport}
-                time={new Date(match.commence_time).toLocaleString()}
-                team1={match.home_team}
-                team2={match.away_team}
-                score1={match.score1}
-                score2={match.score2}
-                odds={
-                  selectedBookmaker?.markets[0]?.outcomes.map(
-                    (outcome) => outcome.price
-                  ) || []
-                }
-                extraValue="-"
-              />
-            );
-          })
-        ) : (
-          <p className="text-4xl text-center">No {filter!== "all" ? filter : ""} {sport !== "all" ? sport.charAt(0).toUpperCase() + sport.slice(1) : ""} matches found.</p>
-
-        )}
+      {/* Horizontal Scrollable Match Cards */}
+      <div className="overflow-x-auto">
+        <div className="flex gap-4">
+          {filteredMatches.length > 0 ? (
+            filteredMatches.map((match) => {
+              const matchSport = match.sport_key.split("_")[0];
+              const selectedBookmaker = match.bookmakers.find(
+                (bm) => bm.key === bookmaker
+              );
+              return (
+                <div key={match.id} className="min-w-[320px] md:min-w-[400px]">
+                  <MatchCard
+                    league={match.sport_title}
+                    sport={matchSport}
+                    time={new Date(match.commence_time).toLocaleString()}
+                    team1={match.home_team}
+                    team2={match.away_team}
+                    score1={match.score1}
+                    score2={match.score2}
+                    odds={
+                      selectedBookmaker?.markets[0]?.outcomes.map(
+                        (outcome) => outcome.price
+                      ) || []
+                    }
+                    extraValue="-"
+                  />
+                </div>
+              );
+            })
+          ) : (
+            <p className="text-4xl text-center w-full">
+              No {filter !== "all" ? filter : ""} {sport !== "all" ? sport.charAt(0).toUpperCase() + sport.slice(1) : ""} matches found.
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
