@@ -6,25 +6,14 @@ function Form2() {
 
   // State for Form2 inputs
   const [formData, setFormData] = useState({
-    email: "",
     username: "",
     password: "",
     confirmPassword: "",
-    profileImage: null, // State for storing the uploaded image
   });
 
   // Handle input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  // Handle image upload
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setFormData({ ...formData, profileImage: imageUrl });
-    }
   };
 
   // Handle form submission
@@ -70,15 +59,14 @@ function Form2() {
   return (
     <div className="relative flex justify-center bg-white px-4 dark:bg-[#2D2D2D]">
       <div className="bg-gradient-to-b from-[#47B67C] to-[#208C53] p-8 rounded-lg shadow-2xl w-full m-20 mx-36 relative z-10">
-        <img src="register2.svg" alt="random" className="w-full h-20 mb-10 mx-auto" />
+        <img src="register2.svg" alt="register header" className="w-full h-20 mb-10 mx-auto" />
         <h1 className="text-xl md:text-2xl font-bold text-[#F6BA02] rounded-2xl px-4 py-2 shadow-md w-96 text-center mx-auto">
           <i>USER SECURITY DETAILS</i>
         </h1>
 
         <form className="w-full mt-6" onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[
-              { label: "Email", type: "email", name: "email" },
+            {[ 
               { label: "Username", type: "text", name: "username" },
               { label: "Password", type: "password", name: "password" },
               { label: "Confirm Password", type: "password", name: "confirmPassword" },
@@ -96,23 +84,6 @@ function Form2() {
                 />
               </label>
             ))}
-          </div>
-
-          <div className="mt-4 w-full">
-            <label className="block text-white font-semibold">Profile Picture</label><br/>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="form-input w-full md:w-96 h-12 rounded p-2 bg-white text-black border-2 border-black"
-            />
-            {formData.profileImage && (
-              <img
-                src={formData.profileImage}
-                alt="Profile Preview"
-                className="mt-4 w-32 h-32 object-cover rounded-md border-2 border-white shadow-lg"
-              />
-            )}
           </div>
 
           <button
