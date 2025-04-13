@@ -1,7 +1,9 @@
 import express from "express";
+import dotenv from "dotenv"
 const router = express.Router();
 
-const API_KEY = 'f39e8a99916db69fec958f0b56306c7b'; // No trailing space!
+dotenv.config()
+const API_KEY =process.env.API_KEY
 
 // GET /api/scores/:sportKey
 router.get('/:sportKey', async (req, res) => {
