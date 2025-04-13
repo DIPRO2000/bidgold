@@ -77,18 +77,46 @@ const fetchOdds = async () => {
   }
 };
 
-const fetchScores = async () => {
-  for (const sportKey of ALLOWED_SPORTS.map(s => `soccer_${s}`)) {
-    try {
-      const url = `${SCORE_BASE_URL}/${sportKey}/scores/?daysFrom=3&apiKey=${API_KEY}`;
-      const response = await axios.get(url);
-      const scores = response.data;
-      latestScores[sportKey] = scores;
 
-      if (hasScoresChanged(scores, previousScores[sportKey])) {
-        previousScores[sportKey] = scores;
-        broadcast('scores', { sportKey, scores });
-        console.log(`[🟢] Scores updated for ${sportKey}: ${scores.length}`);
+//Fetch Live Scores
+const fetchScores = async () => {
+  const now = new Date();
+
+  // Step 1: Filter live matches based on commence_time
+  const liveMatches = latestOdds.filter(match => {
+    const matchTime = new Date(match.commence_time);
+    return matchTime <= now; // Match has started
+  });
+
+  // Step 2: Get unique sportKeys from live matches
+  const liveSportKeys = [...new Set(liveMatches.map(match => match.sport_key))];
+
+  for (const sportKey of liveSportKeys) {
+    try {
+      const url = `${SCORE_BASE_URL}/${sportKey}/scores/?apiKey=${API_KEY}`;
+      const response = await axios.get(url);
+      const allScores = response.data;
+
+      // Step 3: Filter only live (not completed) matches
+      const liveScores = allScores.filter(match => match.completed === false);
+
+      latestScores[sportKey] = liveScores;
+
+      // Log the scores to the console for debugging
+      console.log(`[🟢] Live scores for ${sportKey}:`);
+liveScores.forEach(match => {
+  if (match.scores !== null) {
+    console.log(
+      `Match: ${match.home_team} vs ${match.away_team}, ` +
+      `Score: ${match.scores.home} - ${match.scores.away}`
+    );
+  }
+});
+
+      if (hasScoresChanged(liveScores, previousScores[sportKey])) {
+        previousScores[sportKey] = liveScores;
+        broadcast('scores', { sportKey, scores: liveScores });
+        console.log(`[🟢] Scores updated for ${sportKey}: ${liveScores.length}`);
       } else {
         console.log(`[✅] Scores for ${sportKey} have not changed`);
       }
@@ -96,7 +124,12 @@ const fetchScores = async () => {
       console.error(`[❌] Failed to fetch scores for ${sportKey}:`, err.message);
     }
   }
+
+  if (liveSportKeys.length === 0) {
+    console.log("[ℹ️] No live matches found to fetch scores.");
+  }
 };
+
 
 // ✅ This is the missing piece:
 const setupWebSocket = (server) => {
