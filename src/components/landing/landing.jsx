@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import TopNav from "./../topnav";
+import TopNav from "../topnav"; // comes only once
 import NavbarManager from "../NavManager";
 import Carousel from "./Carousel"; // modern sliding section
 import Sports from "./sports";
@@ -11,15 +11,20 @@ function Landing() {
   const [activeSport, setActiveSport] = useState("all");
 
   return (
-    <div className="pt-20 dark:bg-[#2D2D2D]"> {/* Added padding to prevent content overlap */}
-      <NavbarManager/>
-      <Content />
-      <Sports activeSport={activeSport} setActiveSport={setActiveSport}/>
-      <MatchFixtures sport={activeSport}/>
-      
-   
-      {/* <HelpBanner /> */}
-      <Footer />
+    <div className="dark:bg-[#2D2D2D]">
+      {/* Topmost Nav */}
+      <TopNav />
+
+      {/* Rest of the page */}
+      <div className="pt-14">
+        <TopNav />
+        <NavbarManager />
+        <Carousel />
+        <Sports activeSport={activeSport} setActiveSport={setActiveSport} />
+        <MatchFixtures sport={activeSport} />
+        <HelpBanner />
+        <Footer />
+      </div>
     </div>
   );
 }
