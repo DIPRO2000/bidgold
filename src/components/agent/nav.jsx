@@ -6,12 +6,10 @@ import Switch from "./toggle";
 const Mainav = ({ user, setToken }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
-<<<<<<< HEAD
 
-=======
   const navigate=useNavigate();
   const dropdownRef = useRef(null);
->>>>>>> 1f64adf84d8f44d36ca5f712fa047a518b90c36e
+
   const profileDropdownRef = useRef(null);
 
   useEffect(() => {

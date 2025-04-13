@@ -10,17 +10,14 @@ import Agent from './components/agent/agentmain/agent';
 import MemberDetails from './components/agent/agentmain/members';
 import BetHistory from './components/bethistory/bethistory';
 import TransactionHistory from "./components/bethistory/pages/TransactionHistory";
-<<<<<<< HEAD
+
 
 import Deposit from "./components/bethistory/pages/Deposit";
 import Withdrawal from "./components/bethistory/pages/Withdrawal";
-import MemberDetails from './components/agent/agentmain/members';
 
 
-=======
-import Deposit from "./components/bethistory/pages/Deposit";
-import Withdrawal from "./components/bethistory/pages/Withdrawal"
->>>>>>> 1f64adf84d8f44d36ca5f712fa047a518b90c36e
+
+
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AgentAccountForm from './components/fg';
@@ -37,10 +34,7 @@ function App() {
           <Route path="/Deposit" element={<Deposit />} />
           <Route path="/Withdrawal" element={<Withdrawal />} />
           <Route path="/member/:id" element={<MemberDetails />} />
-<<<<<<< HEAD
 
-=======
->>>>>>> 1f64adf84d8f44d36ca5f712fa047a518b90c36e
 
           <Route path="/register" element={<Register />} />  
           <Route path="/register2" element={<Register2 />} /> 

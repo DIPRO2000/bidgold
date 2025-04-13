@@ -5,7 +5,7 @@ function Content() {
   
   return (
     <div 
-      className='pt-20 min-h-[50vh] bg-[url("public/settings.svg")] bg-cover bg-left flex flex-col md:flex-row items-center space-x-0 md:space-x-3 px-6 md:px-20'
+      className='pt-20 min-h-[50vh] bg-[url("settings.svg")] bg-cover bg-left flex flex-col md:flex-row items-center space-x-0 md:space-x-3 px-6 md:px-20'
     >
       <img src="Profile.svg" className="w-32 md:w-48 mb-4 md:mb-0" alt="Profile" />
       <div className="text-center md:text-left">
