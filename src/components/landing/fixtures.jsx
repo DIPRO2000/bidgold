@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 const MatchCard = ({ league, sport, time, team1, team2, score1, score2, odds, extraValue }) => {
   return (
-    <div className="border rounded-lg p-4 shadow-md w-full md:w-[95%] flex flex-col mx-auto mb-4">
+    <div className="border rounded-lg p-4 shadow-md w-full flex flex-col mb-4">
       <div className="font-bold text-lg mb-2 text-center md:text-left">
         {league} &nbsp;&nbsp;&nbsp;&nbsp; Sport: {sport.toUpperCase()}
       </div>
@@ -104,7 +104,6 @@ const MatchList = ({ sport = "all" }) => {
 
   const filteredMatches = matches.filter((match) => {
     const matchSport = match.sport_key.split("_")[0];
-
     matchesSport = sport === "all" || matchSport === sport;
 
     const now = new Date();
@@ -120,7 +119,8 @@ const MatchList = ({ sport = "all" }) => {
   });
 
   return (
-    <div className="p-4 w-full max-w-5xl mx-auto">
+    <div className="p-4 w-full max-w-7xl mx-auto">
+      {/* Filter Buttons */}
       <div className="flex flex-col md:flex-row gap-2 mb-4 items-center">
         {["All", "Live", "Upcoming"].map((filterType) => (
           <button
