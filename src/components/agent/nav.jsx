@@ -1,11 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
 import Switch from "./toggle";
 
-const Mainav = ({ user, setUser }) => {
+const Mainav = ({ user, setToken }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+<<<<<<< HEAD
 
+=======
+  const navigate=useNavigate();
+  const dropdownRef = useRef(null);
+>>>>>>> 1f64adf84d8f44d36ca5f712fa047a518b90c36e
   const profileDropdownRef = useRef(null);
 
   useEffect(() => {
@@ -23,10 +29,10 @@ const Mainav = ({ user, setUser }) => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem("agent");
     alert("Log out Successfully");
-    window.location.reload();
-    setUser(null);
+    navigate("/agent/login");  
+    setToken(null);
   };
 
   return (
@@ -49,9 +55,9 @@ const Mainav = ({ user, setUser }) => {
           <div className="relative" ref={profileDropdownRef}>
             <button
               onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-              className="flex items-center space-x-2 focus:outline-none hover:text-gray-200"
+              className="flex items-center space-x-2 focus:outline-none cursor-pointer hover:text-gray-200"
             >
-              <span className="lg:inline-block">Hello {user?.firstName || "John"}</span>
+              <span className="lg:inline-block">HELLO AGENT {user?.firstName.toUpperCase() || ""}</span>
               <img
                 src={user?.profilePic || "/Profile.svg"}
                 className="w-10 h-10 rounded-full object-cover"
@@ -63,7 +69,7 @@ const Mainav = ({ user, setUser }) => {
               <div className="absolute right-0 mt-2 bg-white text-black rounded shadow-lg w-40">
                 <button
                   onClick={logout}
-                  className="block w-full text-left px-4 py-2 hover:bg-gray-200"
+                  className="block w-full text-left px-4 py-2 cursor-pointer hover:bg-red-600 hover:rounded"
                 >
                   Log Out
                 </button>
@@ -97,7 +103,7 @@ const Mainav = ({ user, setUser }) => {
                   alt="Profile"
                   className="w-8 h-8 rounded-full object-cover"
                 />
-                <span>{user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : "John Doe"}</span>
+                <span>{user?.firstName && user?.lastName ? `${user.firstName.toUpperCase()} ${user.lastName.toUpperCase()}` : ""}</span>
               </div>
               <Switch />
             </div>

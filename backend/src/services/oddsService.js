@@ -1,20 +1,12 @@
 import axios from "axios";
 import dotenv from "dotenv";
 
-
 dotenv.config();
 
 const API_URL = "https://api.the-odds-api.com/v4/sports/upcoming/odds";
 const API_KEY = process.env.API_KEY;
 
 const ALLOWED_SPORTS = ["soccer", "baseball", "volleyball", "hockey"];
-
-const TOP_LEAGUES = [
-  "FIFA", "UEFA Champions League", "Premier League", "La Liga", "Bundesliga", "Serie A", "Ligue 1", "Eredivisie",
-  "MLB", "NPB", "KBO",
-  "NHL", "KHL", "SHL", "Liiga",
-  "FIVB", "CEV Champions League", "Volleyball Nations League"
-];
 
 const REGIONS = ["eu", "uk", "us"];
 
@@ -59,13 +51,6 @@ export const getOdds = async () => {
     );
 
     console.log("✅ Filtered Matches:", filteredMatches.length);
-
-    // ✅ Prioritize top leagues
-    filteredMatches.sort((a, b) => {
-      const aPriority = TOP_LEAGUES.some(league => a.sport_title.includes(league)) ? 1 : 0;
-      const bPriority = TOP_LEAGUES.some(league => b.sport_title.includes(league)) ? 1 : 0;
-      return bPriority - aPriority;
-    });
 
     return filteredMatches.length > 0 ? filteredMatches : [{ message: "No upcoming games for allowed sports." }];
   } catch (error) {

@@ -56,8 +56,9 @@ const MatchCard = ({ league, sport, time, team1, team2, score1, score2, odds, ex
 
 const MatchList = ({ sport = "all" }) => {
   const [matches, setMatches] = useState([]);
+  const [scores, setScores] = useState({});       //Score useState
   const [filter, setFilter] = useState("all");
-  const [bookmaker, setBookmaker] = useState("pinnacle");
+  const [bookmaker, setBookmaker] = useState("unibet_eu");
   const [bookmakers, setBookmakers] = useState([]);
   let matchesSport;
 
@@ -73,6 +74,33 @@ const MatchList = ({ sport = "all" }) => {
       })
       .catch((error) => console.error("Error fetching matches:", error));
   }, []);
+
+  //Score Fetching from Backend
+  useEffect(() => {
+    const liveSportKeys = [...new Set(
+      matches
+        .filter((match) => {
+          const now = new Date();
+          const matchTime = new Date(match.commence_time);
+          return matchTime <= now; // live
+        })
+        .map((match) => match.sport_key)
+    )];
+
+   console.log("Live Sport Keys:", liveSportKeys);
+  
+    liveSportKeys.forEach((key) => {
+      fetch(`http://localhost:3000/api/scores/${key}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setScores(prev => ({ ...prev, [key]: data }));
+        })
+        .catch((err) => console.error(`Score fetch failed for ${key}:`, err));
+    });
+  }, [matches]);
+
+
+  
 
   const filteredMatches = matches.filter((match) => {
     const matchSport = match.sport_key.split("_")[0];
@@ -122,13 +150,25 @@ const MatchList = ({ sport = "all" }) => {
         </select>
       </div>
 
-      <div className="overflow-x-auto h-[350px] space-y-4">
+      <div className="overflow-x-auto h-full min-h-40 space-y-4">
         {filteredMatches.length > 0 ? (
           filteredMatches.map((match) => {
             const matchSport = match.sport_key.split("_")[0];
             const selectedBookmaker = match.bookmakers.find(
               (bm) => bm.key === bookmaker
             );
+
+            const scoreData = scores[match.sport_key]?.find(
+              (item) =>
+                item.home_team === match.home_team &&
+                item.away_team === match.away_team
+            );
+            
+            // Optional chaining to avoid undefined errors
+            const score1 = scoreData?.scores?.[0]?.score ?? "-";
+            const score2 = scoreData?.scores?.[1]?.score ?? "-";
+
+
             return (
               <MatchCard
                 key={match.id}
@@ -137,8 +177,8 @@ const MatchList = ({ sport = "all" }) => {
                 time={new Date(match.commence_time).toLocaleString()}
                 team1={match.home_team}
                 team2={match.away_team}
-                score1={match.score1}
-                score2={match.score2}
+                score1={score1}
+                score2={score2}
                 odds={
                   selectedBookmaker?.markets[0]?.outcomes.map(
                     (outcome) => outcome.price

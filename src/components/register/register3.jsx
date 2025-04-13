@@ -1,5 +1,5 @@
 import React from "react";
-import NavbarManager from "../NavManager"; // Ensure correct path
+import NavbarManager from "../agent/Navbarmanager"; // Ensure correct path
 import Content from "./content";
 import Form3 from "./form3";
 import Footer from "./footer";

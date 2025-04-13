@@ -1,16 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Form() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate=useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(""); // Reset error message
 
     try {
-      const response = await fetch("http://localhost:3000/api/auth/login", {
+      const response = await fetch("http://localhost:3000/api/agent/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,10 +29,10 @@ function Form() {
 
       // Store JWT token and user data
       localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("agent", JSON.stringify(data.agent));
 
       alert("Login Successful!");
-      window.location.href = "/agent"; // Redirect to /agent
+      navigate("/agent"); // Redirect to /agent
     } catch (err) {
       setError(err.message);
     }
