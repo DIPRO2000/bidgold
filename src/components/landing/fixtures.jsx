@@ -56,9 +56,8 @@ const MatchCard = ({ league, sport, time, team1, team2, score1, score2, odds, ex
 
 const MatchList = ({ sport = "all" }) => {
   const [matches, setMatches] = useState([]);
-  const [scores, setScores] = useState({});       //Score useState
   const [filter, setFilter] = useState("all");
-  const [bookmaker, setBookmaker] = useState("unibet_eu");
+  const [bookmaker, setBookmaker] = useState("pinnacle");
   const [bookmakers, setBookmakers] = useState([]);
   let matchesSport;
 
@@ -74,33 +73,6 @@ const MatchList = ({ sport = "all" }) => {
       })
       .catch((error) => console.error("Error fetching matches:", error));
   }, []);
-
-  //Score Fetching from Backend
-  useEffect(() => {
-    const liveSportKeys = [...new Set(
-      matches
-        .filter((match) => {
-          const now = new Date();
-          const matchTime = new Date(match.commence_time);
-          return matchTime <= now; // live
-        })
-        .map((match) => match.sport_key)
-    )];
-
-   console.log("Live Sport Keys:", liveSportKeys);
-  
-    liveSportKeys.forEach((key) => {
-      fetch(`http://localhost:3000/api/scores/${key}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setScores(prev => ({ ...prev, [key]: data }));
-        })
-        .catch((err) => console.error(`Score fetch failed for ${key}:`, err));
-    });
-  }, [matches]);
-
-
-  
 
   const filteredMatches = matches.filter((match) => {
     const matchSport = match.sport_key.split("_")[0];
@@ -150,48 +122,41 @@ const MatchList = ({ sport = "all" }) => {
         </select>
       </div>
 
-      <div className="overflow-x-auto h-full min-h-40 space-y-4">
-        {filteredMatches.length > 0 ? (
-          filteredMatches.map((match) => {
-            const matchSport = match.sport_key.split("_")[0];
-            const selectedBookmaker = match.bookmakers.find(
-              (bm) => bm.key === bookmaker
-            );
-
-            const scoreData = scores[match.sport_key]?.find(
-              (item) =>
-                item.home_team === match.home_team &&
-                item.away_team === match.away_team
-            );
-            
-            // Optional chaining to avoid undefined errors
-            const score1 = scoreData?.scores?.[0]?.score ?? "-";
-            const score2 = scoreData?.scores?.[1]?.score ?? "-";
-
-
-            return (
-              <MatchCard
-                key={match.id}
-                league={match.sport_title}
-                sport={matchSport}
-                time={new Date(match.commence_time).toLocaleString()}
-                team1={match.home_team}
-                team2={match.away_team}
-                score1={score1}
-                score2={score2}
-                odds={
-                  selectedBookmaker?.markets[0]?.outcomes.map(
-                    (outcome) => outcome.price
-                  ) || []
-                }
-                extraValue="-"
-              />
-            );
-          })
-        ) : (
-          <p className="text-4xl text-center">No {filter!== "all" ? filter : ""} {sport !== "all" ? sport.charAt(0).toUpperCase() + sport.slice(1) : ""} matches found.</p>
-
-        )}
+      {/* Horizontal Scrollable Match Cards */}
+      <div className="overflow-x-auto">
+        <div className="flex gap-4">
+          {filteredMatches.length > 0 ? (
+            filteredMatches.map((match) => {
+              const matchSport = match.sport_key.split("_")[0];
+              const selectedBookmaker = match.bookmakers.find(
+                (bm) => bm.key === bookmaker
+              );
+              return (
+                <div key={match.id} className="min-w-[320px] md:min-w-[400px]">
+                  <MatchCard
+                    league={match.sport_title}
+                    sport={matchSport}
+                    time={new Date(match.commence_time).toLocaleString()}
+                    team1={match.home_team}
+                    team2={match.away_team}
+                    score1={match.score1}
+                    score2={match.score2}
+                    odds={
+                      selectedBookmaker?.markets[0]?.outcomes.map(
+                        (outcome) => outcome.price
+                      ) || []
+                    }
+                    extraValue="-"
+                  />
+                </div>
+              );
+            })
+          ) : (
+            <p className="text-4xl text-center w-full">
+              No {filter !== "all" ? filter : ""} {sport !== "all" ? sport.charAt(0).toUpperCase() + sport.slice(1) : ""} matches found.
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
