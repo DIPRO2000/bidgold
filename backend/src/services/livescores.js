@@ -15,7 +15,7 @@ router.get('/:sportKey', async (req, res) => {
 
   try {
     const response = await fetch(
-      `https://api.the-odds-api.com/v4/sports/${sportKey}/scores/?daysFrom=3&apiKey=${API_KEY}`
+      `https://api.the-odds-api.com/v4/sports/${sportKey}/scores/?daysFrom=1&apiKey=${API_KEY}`
     );
     const data = await response.json();
 
