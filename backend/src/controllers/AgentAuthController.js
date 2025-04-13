@@ -73,6 +73,9 @@ export const AgentLogin=async(req,res)=>
             id: AgentUser._id,
             firstName: AgentUser.firstName,
             lastName: AgentUser.lastName,
+            balance:AgentUser.balance,
+            deposit:AgentUser.deposit,
+            payout:AgentUser.payout
             },
         });
     } 

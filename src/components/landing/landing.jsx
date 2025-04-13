@@ -19,12 +19,7 @@ function Landing() {
       <Content />
       <Sports activeSport={activeSport} setActiveSport={setActiveSport}/>
       <MatchFixtures sport={activeSport}/>
-<<<<<<< HEAD
-      {/* <Body /> */}
-      {/* <BettingDashboard /> */}
-=======
       
->>>>>>> 6f607e83782df4872375c72091aa7903203534b7
    
       {/* <HelpBanner /> */}
       <Footer />

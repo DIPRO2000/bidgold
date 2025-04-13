@@ -5,12 +5,18 @@ import { Link } from 'react-router-dom';
 import memberData from '../../../data/memberData';
 function Dashboard() {
   const navigate=useNavigate();
+  const agentUser=JSON.parse(localStorage.getItem("agent"));
+
   const data = [
-    { icon: <Wallet size={28} />, title: "Main balance", value: "$121.20" },
-    { icon: <DollarSign size={28} />, title: "Total earning", value: "$362.28" },
-    { icon: <PiggyBank size={28} />, title: "Deposit total", value: "$178.65" },
-    { icon: <Send size={28} />, title: "Total payout", value: "$568.14" },
+    { icon: <Wallet size={28} />, title: "Main balance", value: agentUser.balance },
+    { icon: <DollarSign size={28} />, title: "Total earning", value:"1000"  },
+    { icon: <PiggyBank size={28} />, title: "Deposit total", value:agentUser.deposit  },
+    { icon: <Send size={28} />, title: "Total payout", value:agentUser.payout  },
   ];
+
+  const UserCreation=()=>{
+    navigate("/register");
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -25,6 +31,8 @@ function Dashboard() {
           ))}
         </div>
       </div>
+
+      <div>CREATE NEW USER ACCOUNT:<button onClick={UserCreation} className="p-3 bg-green-500 rounded-2xl cursor-pointer hover:bg-green-700">CREATE</button></div>
 
       <div className="bg-white rounded-xl shadow-lg p-6">
         <div className="flex justify-between items-center mb-4">
