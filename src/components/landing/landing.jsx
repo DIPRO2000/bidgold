@@ -1,14 +1,11 @@
-import React,{useState} from "react";
-
-import Content from "./content";
-import MatchFixtures from "./fixtures"; // Ensure correct path
-
-
-import Footer from "./Footer";
-
-import HelpBanner from "./gethelp";
+import React, { useState } from "react";
+import TopNav from "./../topnav";
 import NavbarManager from "../NavManager";
+import Carousel from "./Carousel"; // modern sliding section
 import Sports from "./sports";
+import MatchFixtures from "./fixtures";
+import HelpBanner from "./gethelp";
+import Footer from "./Footer";
 
 function Landing() {
   const [activeSport, setActiveSport] = useState("all");
