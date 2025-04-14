@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   FaTrophy,
-  FaFootballBall,
+  FaFutbol,         // ✅ Changed from FaFootballBall to FaFutbol
   FaBaseballBall,
   FaHockeyPuck,
   FaVolleyballBall
@@ -10,7 +10,7 @@ import {
 function Sports({ activeSport, setActiveSport }) {
   const sports = [
     { id: 'all', name: 'All Sports', icon: <FaTrophy size={24} /> },
-    { id: 'soccer', name: 'Football', icon: <FaFootballBall size={24} /> },
+    { id: 'soccer', name: 'Football', icon: <FaFutbol size={24} /> }, // ✅ Soccer icon
     { id: 'baseball', name: 'Baseball', icon: <FaBaseballBall size={24} /> },
     { id: 'hockey', name: 'Hockey', icon: <FaHockeyPuck size={24} /> },
     { id: 'volleyball', name: 'Volleyball', icon: <FaVolleyballBall size={24} /> },
