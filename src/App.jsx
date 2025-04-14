@@ -13,6 +13,7 @@ import TransactionHistory from "./components/bethistory/pages/TransactionHistory
 
 import Deposit from "./components/bethistory/pages/Deposit";
 import Withdrawal from "./components/bethistory/pages/Withdrawal";
+import MemberDetails from './components/agent/agentmain/members';
 
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';

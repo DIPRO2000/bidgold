@@ -91,6 +91,7 @@ const MatchList = ({ sport = "all" }) => {
     const matchSport = match.sport_key.split("_")[0];
 
     const matchesSport = sport === "all" || matchSport === sport;
+    
 
     const now = new Date();
     const matchTime = new Date(match.commence_time);
@@ -109,7 +110,8 @@ const MatchList = ({ sport = "all" }) => {
   };
 
   return (
-    <div className="p-4 w-full max-w-5xl mx-auto">
+    <div className="p-4 w-full max-w-7xl mx-auto">
+      {/* Filter Buttons */}
       <div className="flex flex-col md:flex-row gap-2 mb-4 items-center">
         {["All", "Live", "Upcoming"].map((filterType) => (
           <button
