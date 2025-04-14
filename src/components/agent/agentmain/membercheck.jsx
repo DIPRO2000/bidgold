@@ -1,62 +1,57 @@
-import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import memberData from '../../../data/memberData';
+import { useEffect, useState } from 'react';
 import NavbarManager from '../Navbarmanager';
 
 function MemberDetails() {
   const { id } = useParams();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // NEW STATE
 
-  useEffect(()=>{
-    const UserDetails=async()=>
-    {
-      try 
-      {
-        const res = await fetch(`http://localhost:3000/api/user/${id}`, {
-          method: "GET",
-        });
-
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/api/user/${id}`);
         if (!res.ok) {
-          throw new Error('Failed to fetch users details');
+          throw new Error('Failed to fetch user details');
         }
-
         const data = await res.json();
-        alert(data);
-        console.log("Fetched users:", data);
-      } 
-      catch (error) {
-        
+        setUser(data.user);
+      } catch (error) {
+        console.error('Error fetching user:', error);
+      } finally {
+        setLoading(false); // Done loading no matter what
       }
-    }
-  })
-
-  const member = memberData.find((m) => m.id === parseInt(id));
-
-  const [transactions, setTransactions] = useState(member.transactions);
-  const [amount, setAmount] = useState('');
-  const [transactionType, setTransactionType] = useState('Deposit');
-  const [activeTab, setActiveTab] = useState('transactions');
-
-  const handleAddTransaction = () => {
-    if (!amount) return;
-    const newTransaction = {
-      time: new Date().toLocaleTimeString(),
-      amount: parseFloat(amount),
-      type: transactionType,
     };
-    setTransactions([...transactions, newTransaction]);
-    setAmount('');
-  };
+
+    fetchUserDetails();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-[#2D2D2D] text-black dark:text-white">
+        <p className="text-xl">Loading member details...</p>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-[#2D2D2D] text-black dark:text-white">
+        <p className="text-xl text-red-500">User not found</p>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white text-black dark:bg-[#2D2D2D] dark:text-[#D9D9D9]">
-      <NavbarManager />
+      <NavbarManager/>
       <div className="container mx-auto px-4 py-8">
         <span className=" inline-block text-3xl just font-bold  dark:text-[#F6BA02] mt-20 mb-6 shadow-lg rounded-lg p-4 bg-gradient-to-r from-[#47B67C] to-[#208C53] text-white">
-          Member Dashboard: {member.name}
+          Member Dashboard: {user.firstName} {user.lastName}
         </span>
 
         {/* Tabs */}
-        <div className="flex space-x-6 mb-8 border-b border-[#208C53] dark:border-[#444]">
+        {/* <div className="flex space-x-6 mb-8 border-b border-[#208C53] dark:border-[#444]">
           <button
             className={`px-6 py-3 font-medium rounded-lg transition-all duration-300 ${
               activeTab === 'transactions'
@@ -87,10 +82,10 @@ function MemberDetails() {
           >
             Add Transaction
           </button>
-        </div>
+        </div> */}
 
         {/* Tab Content */}
-        {activeTab === 'transactions' && (
+        {/* {activeTab === 'transactions' && (
           <div className="mb-10 bg-[#F5F5F5] dark:bg-[#3A3A3A] rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-semibold text-[#47B67C] dark:text-[#208C53] mb-4">
               Transaction History
@@ -114,9 +109,9 @@ function MemberDetails() {
               </tbody>
             </table>
           </div>
-        )}
+        )} */}
 
-        {activeTab === 'bets' && (
+        {/* {activeTab === 'bets' && (
           <div className="mb-10 bg-[#F5F5F5] dark:bg-[#3A3A3A] rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-semibold text-[#47B67C] dark:text-[#208C53] mb-4">
               Bet History
@@ -142,9 +137,9 @@ function MemberDetails() {
               </tbody>
             </table>
           </div>
-        )}
+        )} */}
 
-        {activeTab === 'add' && (
+        {/* {activeTab === 'add' && (
           <div className="mb-10 bg-[#F5F5F5] dark:bg-[#3A3A3A] rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-semibold text-[#47B67C] dark:text-[#208C53] mb-4">
               Add Transaction
@@ -173,7 +168,7 @@ function MemberDetails() {
               </button>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

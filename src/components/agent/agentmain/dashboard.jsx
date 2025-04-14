@@ -9,6 +9,7 @@ function Dashboard() {
   const token = localStorage.getItem("token");
 
   const [users, setUsers] = useState([]);
+  const [userID,setUserId]=useState(null);
   const [loading, setLoading] = useState(true); // Add loading state
 
   const data = [
@@ -21,6 +22,11 @@ function Dashboard() {
   const UserCreation = () => {
     navigate("/register");
   };
+
+  // const UserDetails=(user._id)=>
+  // {
+  //   navigate(`/membercheck/${user._id}`)
+  // }
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -108,8 +114,8 @@ function Dashboard() {
                 </tr>
               ) : users.length > 0 ? (
                 users.map((user) => (
-                  <tr key={user._id} className="border-b hover:bg-gray-100 dark:hover:bg-[#4C4C4C]">
-                    <Link to={`/member/${user._id}`}><td className="py-3 px-4">{user.username}</td></Link>
+                  <tr key={user._id} className="border-b hover:bg-gray-100 dark:hover:bg-[#4C4C4C]" onClick={() => navigate(`/membercheck/${user._id}`)}>
+                    <td className="py-3 px-4">{user.username}</td>
                     <td className="py-3 px-4">{new Date(user.createdAt).toLocaleDateString()}</td>
                     <td className="py-3 px-4">{user.email || "N/A"}</td>
                     <td className="py-3 px-4">

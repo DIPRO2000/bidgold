@@ -15,6 +15,7 @@ import feedbackRoutes from "./src/routes/feedbackRoutes.js";
 import userSettingsRoute from "./src/routes/settings.js";
 import AgentAuthRoutes from "./src/routes/AgentAuth.js";
 import UserFetch from "./src/routes/UserFetch.js";
+import UserDetails from "./src/routes/UserDetails.js";
 
 // Load environment variables
 dotenv.config();
@@ -38,6 +39,7 @@ app.use("/api", feedbackRoutes);
 app.use("/api/user", userSettingsRoute);
 app.use("/api/agent", AgentAuthRoutes);
 app.use("/api",UserFetch);
+app.use("/api/user",UserDetails);
 
 // 🌐 MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
