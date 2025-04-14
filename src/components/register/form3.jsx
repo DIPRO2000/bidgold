@@ -44,7 +44,7 @@ function Form() {
                 className={`mt-6 dark:bg-[#2D2D2D] bg-white text-green-600 w-full font-bold sm:w-1/3 md:w-1/4 lg:w-1/5 
                   border-2 border-black p-4 rounded-md shadow-inner shadow-black transition-all duration-300 
                   ${isChecked ? 'hover:bg-gray-400' : 'opacity-50 cursor-not-allowed'}`}
-                onClick={() => isChecked && navigate('/login')}
+                onClick={() => isChecked && navigate('/agent')}
                 disabled={!isChecked} 
               >
                 DONE

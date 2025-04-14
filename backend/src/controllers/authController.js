@@ -10,51 +10,47 @@ if (!JWT_SECRET) {
   throw new Error("JWT_SECRET is not defined in environment variables!");
 }
 
-// User Registration
 export const register = async (req, res) => {
   try {
-    const { firstName, lastName, dateOfBirth, phone, gender, username, email, password } = req.body;
+    console.log("Request Body:", req.body); // 👈 Log full body
 
-    // Validate password
+    const { firstName, lastName, username, password, agentId } = req.body;
+
+    const createdBy = agentId;
+    if (!createdBy) {
+      return res.status(401).json({ message: "Unauthorized. Agent ID missing." });
+    }
+
     if (!password || password.length < 6) {
       return res.status(400).json({ message: "Password must be at least 6 characters long" });
     }
 
-    // Convert "DD-MMM-YYYY" format to Date
-    const dobParts = dateOfBirth.split(" ");
-    const formattedDOB = new Date(`${dobParts[1]} ${dobParts[0]}, ${dobParts[2]}`);
-    if (isNaN(formattedDOB)) {
-      return res.status(400).json({ message: "Invalid date format. Use DD-MMM-YYYY (e.g., 15-Mar-1995)" });
-    }
-
-    // Check if user already exists
-    const existingUser = await User.findOne({ $or: [{ email }, { phone }] });
+    const existingUser = await User.findOne({ username });
     if (existingUser) {
-      return res.status(400).json({ message: "User with this email or phone number already exists" });
+      return res.status(400).json({ message: "User with this username already exists" });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create and save user
     const newUser = new User({
       firstName,
       lastName,
-      dateOfBirth: formattedDOB,
-      phone,
-      gender,
       username,
-      email,
       password: hashedPassword,
+      createdBy,
     });
 
     await newUser.save();
 
     res.status(201).json({ message: "User registered successfully!" });
+
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Registration error:", error); // 👈 Print full error
+    res.status(500).json({ error: "Internal server error YES" });
   }
 };
+
+
 
 // User Login
 export const login = async (req, res) => {

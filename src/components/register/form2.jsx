@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function Form2() {
   const navigate = useNavigate();
+  const agentId=JSON.parse(localStorage.getItem("agent")).id;
 
   // State for Form2 inputs
   const [formData, setFormData] = useState({
@@ -34,7 +35,7 @@ function Form2() {
     }
 
     // Combine both form data
-    const completeData = { ...previousData, ...formData };
+    const completeData = { ...previousData, ...formData,agentId };
     console.log(JSON.stringify(completeData));
 
     try {

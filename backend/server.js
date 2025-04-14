@@ -14,6 +14,7 @@ import scoreRoutes from "./src/services/livescores.js";
 import feedbackRoutes from "./src/routes/feedbackRoutes.js";
 import userSettingsRoute from "./src/routes/settings.js";
 import AgentAuthRoutes from "./src/routes/AgentAuth.js";
+import UserFetch from "./src/routes/UserFetch.js";
 
 // Load environment variables
 dotenv.config();
@@ -36,6 +37,7 @@ app.use("/api/scores", scoreRoutes);
 app.use("/api", feedbackRoutes);
 app.use("/api/user", userSettingsRoute);
 app.use("/api/agent", AgentAuthRoutes);
+app.use("/api",UserFetch);
 
 // 🌐 MongoDB Connection
 mongoose.connect(process.env.MONGO_URI)
