@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AgentAccountForm = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const AgentAccountForm = () => {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const navigate=useNavigate();
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -52,11 +54,15 @@ const AgentAccountForm = () => {
       const data = await response.json();
   
       if (!response.ok) {
-        throw new Error(data.error || "Something went wrong");
+        throw new Error(data.message || "Something went wrong");
       }
       else
+      {
+        setInterval(()=>{
+          navigate("/agent/login");
+        },1000)
+      }
       
-  
       setSuccess("Agent account created successfully!");
       setFormData({
         firstName: "",
