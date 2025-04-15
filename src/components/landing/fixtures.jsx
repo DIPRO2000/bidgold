@@ -150,7 +150,7 @@ const MatchList = ({ sport = "all" }) => {
         </select>
       </div>
 
-<<<<<<< HEAD
+
       <div className="overflow-x-auto h-full min-h-40 space-y-4">
         {filteredMatches.length > 0 ? (
           filteredMatches.map((match) => {
@@ -193,7 +193,7 @@ const MatchList = ({ sport = "all" }) => {
           <p className="text-4xl text-center">No {filter!== "all" ? filter : ""} {sport !== "all" ? sport.charAt(0).toUpperCase() + sport.slice(1) : ""} matches found.</p>
 
         )}
-=======
+
       {/* Horizontal Scrollable Match Cards */}
       <div className="overflow-x-auto">
         <div className="flex gap-4">
@@ -233,7 +233,7 @@ const MatchList = ({ sport = "all" }) => {
             </p>
           )}
         </div>
->>>>>>> 5b18bf0afd797c5a490ec9f44582f360467d4f75
+
       </div>
     </div>
   );
@@ -242,4 +242,3 @@ const MatchList = ({ sport = "all" }) => {
 export default MatchList;
 
 
-// latest

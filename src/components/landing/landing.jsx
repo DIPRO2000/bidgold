@@ -11,7 +11,7 @@ function Landing() {
   const [activeSport, setActiveSport] = useState("all");
 
   return (
-<<<<<<< HEAD
+
     <div className="pt-20 dark:bg-[#2D2D2D]"> {/* Added padding to prevent content overlap */}
       <NavbarManager/>
       <Content />
@@ -21,7 +21,7 @@ function Landing() {
    
       {/* <HelpBanner /> */}
       <Footer />
-=======
+
     <div className="dark:bg-[#2D2D2D]">
       <TopNav />
       <div className="pt-14">
@@ -34,7 +34,7 @@ function Landing() {
         <HelpBanner />
         {/* <Footer /> */}
       </div>
->>>>>>> 5b18bf0afd797c5a490ec9f44582f360467d4f75
+      </div>
     </div>
   );
 }
