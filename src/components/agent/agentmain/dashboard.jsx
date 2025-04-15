@@ -49,7 +49,6 @@ function Dashboard() {
         }
 
         const data = await res.json();
-        console.log("Fetched users:", data); // Debug: Log the response data
         setUsers(data);
       } catch (err) {
         console.error("Error fetching users:", err);

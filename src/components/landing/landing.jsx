@@ -21,7 +21,7 @@ function Landing() {
         <Sports activeSport={activeSport} setActiveSport={setActiveSport} />
         <MatchFixtures sport={activeSport} />
         <HelpBanner />
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </div>
   );
