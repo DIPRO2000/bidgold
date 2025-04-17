@@ -1,9 +1,15 @@
 import React from 'react'
-import NavbarManager from '../NavManager';
+import Mainav from './nav';
+import Content from './content';
+import DashboardCards from './cards';
+import Dashboard from './agents_list';
 function Admin() {
   return (
     <div>
-      <NavbarManager />
+      <Mainav />
+        <Content />
+        <DashboardCards />
+        <Dashboard />
     </div>
   )
 }

@@ -10,25 +10,13 @@ import Agent from './components/agent/agentmain/agent';
 import MemberDetails from './components/agent/agentmain/members';
 import BetHistory from './components/bethistory/bethistory';
 import TransactionHistory from "./components/bethistory/pages/TransactionHistory";
-<<<<<<< HEAD
+import Register_agent from './components/admin/register_agent';
 import Admin from './components/admin/admin';
-
 import Deposit from "./components/bethistory/pages/Deposit";
 import Withdrawal from "./components/bethistory/pages/Withdrawal";
-
-
-
-=======
-
-import Deposit from "./components/bethistory/pages/Deposit";
-import Withdrawal from "./components/bethistory/pages/Withdrawal";
-import MemberDetails from './components/agent/agentmain/members';
->>>>>>> 5b18bf0afd797c5a490ec9f44582f360467d4f75
-
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AgentAccountForm from './components/fg';
-
+import AgentDetails from './components/admin/agents';
 function App() {
   return (
     <Router>
@@ -37,15 +25,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/bethistory" element={<BetHistory />} />
           <Route path="/TransactionHistory" element={<TransactionHistory />} />
-
+          <Route path="/register_agent" element={<Register_agent />} />
           <Route path="/Deposit" element={<Deposit />} />
           <Route path="/Withdrawal" element={<Withdrawal />} />
           <Route path="/member/:id" element={<MemberDetails />} />
-<<<<<<< HEAD
           <Route path="/admin" element={<Admin />} />
-=======
->>>>>>> 5b18bf0afd797c5a490ec9f44582f360467d4f75
-
           <Route path="/register" element={<Register />} />  
           <Route path="/register2" element={<Register2 />} /> 
           <Route path="/register3" element={<Register3 />} />
@@ -53,7 +37,7 @@ function App() {
           <Route path="/agent/login" element={<LoginAgent />} />
           <Route path="/agent/usercreate" element={<AgentAccountForm/>} />
           <Route path="/agent" element={<Agent />} />
-
+          <Route path="/agent/:id" element={<AgentDetails />} />
       </Routes>
     </Router>
   );
