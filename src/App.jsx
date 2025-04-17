@@ -10,10 +10,23 @@ import Agent from './components/agent/agentmain/agent';
 import MemberDetails from './components/agent/agentmain/members';
 import BetHistory from './components/bethistory/bethistory';
 import TransactionHistory from "./components/bethistory/pages/TransactionHistory";
+
 import MemberCheck from "./components/agent/agentmain/membercheck";     //FOR TEST PURPOSE (TEMPORARY)
+
+
+import Admin from './components/admin/admin';
+
 
 import Deposit from "./components/bethistory/pages/Deposit";
 import Withdrawal from "./components/bethistory/pages/Withdrawal";
+
+
+
+
+
+// import Deposit from "./components/bethistory/pages/Deposit";
+// import Withdrawal from "./components/bethistory/pages/Withdrawal";
+// import MemberDetails from './components/agent/agentmain/members';
 
 
 
@@ -32,7 +45,6 @@ function App() {
           <Route path="/Deposit" element={<Deposit />} />
           <Route path="/Withdrawal" element={<Withdrawal />} />
           <Route path="/member/:id" element={<MemberDetails />} />
-
           <Route path="/register" element={<Register />} />  
           <Route path="/register2" element={<Register2 />} /> 
           <Route path="/register3" element={<Register3 />} />

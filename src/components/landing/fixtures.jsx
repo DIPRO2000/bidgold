@@ -141,6 +141,7 @@ const MatchList = ({ sport = "all" }) => {
         </select>
       </div>
 
+
       {/* Horizontal Scrollable Match Cards */}
       <div className="overflow-x-auto">
         <div className="flex gap-4">
@@ -162,7 +163,7 @@ const MatchList = ({ sport = "all" }) => {
               const score2 = scoreData?.scores?.[1]?.score ?? "-";
 
               return (
-                <div key={match.id} className="min-w-[320px] md:min-w-[400px]">
+                <div key={match.id} className="min-w-full">
                   <MatchCard
                     league={match.sport_title}
                     time={new Date(match.commence_time).toLocaleString()}
@@ -182,14 +183,19 @@ const MatchList = ({ sport = "all" }) => {
           ) : (
             <p className="text-4xl text-center w-full">
               No {filter !== "all" ? filter : ""}{" "}
-              {sport !== "all" ? sport.charAt(0).toUpperCase() + sport.slice(1) : ""}{" "}
+              {sport !== "all"
+                ? sport.charAt(0).toUpperCase() + sport.slice(1)
+                : ""}{" "}
               matches found.
             </p>
           )}
         </div>
-      </div>
+      
+    </div>
     </div>
   );
 };
 
 export default MatchList;
+
+
