@@ -189,7 +189,7 @@ function MemberDetails() {
                     <td className="px-6 py-4">
                       {tx.Date ? new Date(tx.Date).toLocaleString() : '—'}
                     </td>
-                    <td className="px-6 py-4 text-[#208C53]">
+                    <td className={`px-6 ${tx.Type === "deposit" ? "text-red-600" : "text-[#208c51]"} py-4 `}>
                       ${tx.amount?.toFixed(2) || '0.00'}
                     </td>
                     <td className="px-6 py-4 capitalize">

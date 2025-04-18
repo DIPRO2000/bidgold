@@ -56,6 +56,7 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
+    
 
     // Find user by username
     const user = await User.findOne({ username });
@@ -67,10 +68,10 @@ export const login = async (req, res) => {
 
     // Generate JWT token
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "1d" });
+    
 
-    // Generate Gravatar URL
-    const emailHash = crypto.createHash("md5").update(user.email.trim().toLowerCase()).digest("hex");
-    const profilePic = `https://www.gravatar.com/avatar/${emailHash}?d=identicon`;
+    
+    
 
     // Return user info with token
     res.json({
@@ -81,10 +82,10 @@ export const login = async (req, res) => {
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
-        profilePic,
       },
     });
   } catch (error) {
+    
     res.status(500).json({ error: error.message });
   }
 };
