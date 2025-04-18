@@ -197,5 +197,3 @@ const MatchList = ({ sport = "all" }) => {
 };
 
 export default MatchList;
-
-
