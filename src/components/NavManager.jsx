@@ -4,7 +4,7 @@ import AgentNav from "../components/agent/nav";
 import GuestNav from "./authnav";
 
 const NavbarManager = () => {
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(localStorage.getItem("token")?localStorage.getItem("token").split(" ")[1]:null);
   if(localStorage.getItem("user"))
   {
     const [user, setUser] = useState(
@@ -20,7 +20,7 @@ const NavbarManager = () => {
       return () => window.removeEventListener("storage", handleStorageChange);
     }, []);
   
-    return token ? <Mainav user={user} setToken={setToken} /> : <GuestNav />;
+    return token ? <Mainav user={user} setUser={setUser} /> : <GuestNav />;
   }
   else if(localStorage.getItem("agent"))
   {

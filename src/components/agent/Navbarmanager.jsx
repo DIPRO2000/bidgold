@@ -3,7 +3,7 @@ import Mainav from "./nav";
 import GuestNav from "./authnav";
 
 const NavbarManager = () => {
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(localStorage.getItem("token")?localStorage.getItem("token").split(" ")[1]:null);
   const [agent, setAgent] = useState(
     localStorage.getItem("agent") ? JSON.parse(localStorage.getItem("agent")) : null
   );

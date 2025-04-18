@@ -35,8 +35,14 @@ const Mainav = ({ user, setUser }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     alert("Log out Successfully");
-    navigate("/");
-    setUser(null);
+    if(window.location.pathname==="/")
+    {
+      window.location.reload();
+    }
+    else
+    {
+      navigate("/");
+    }
   };
 
   const userProfile=()=>{
@@ -147,7 +153,7 @@ const Mainav = ({ user, setUser }) => {
                   alt="Profile"
                   className="w-8 h-8 rounded-full object-cover"
                 />
-                <span>{user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : "John Doe"}</span>
+                <span>{user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : " "}</span>
               </div>
               <Switch />
             </div>

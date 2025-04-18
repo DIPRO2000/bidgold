@@ -57,16 +57,16 @@ const GuestNav = () => {
             }`}
             onClick={() => navigate("/login")}
           >
-            Sign in
+            Log in
           </button>
-          <button
+          {/* <button
             className={`px-4 py-1 rounded-md cursor-pointer font-semibold shadow-md ${
               ["/register", "/register2", "/register3"].includes(location.pathname) ? "bg-[#208C53] text-white shadow-md shadow-gray-900" : "bg-white text-black border-black border-2 hover:bg-gray-200 active:bg-[#208C53] active:text-white active:border-0"
             }`}
             onClick={() => navigate("/register")}
           >
             Register
-          </button>
+          </button> */}
         </div>
 
         <button className="md:hidden focus:outline-none" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle Menu">
